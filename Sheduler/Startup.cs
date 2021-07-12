@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +10,12 @@ using Microsoft.IdentityModel.Tokens;
 using Sheduler.Controllers;
 using Sheduler.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using Microsoft.Extensions.Logging;
+using Sheduler.Extensions;
+using Sheduler.Services.Logger;
+using System.Text.Json.Serialization;
+using Sheduler.Middlewares.ExceptionHandler;
 
 namespace Sheduler
 {
@@ -21,11 +23,10 @@ namespace Sheduler
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -51,9 +52,20 @@ namespace Sheduler
                         };
                     });
             services.AddAuthorization();
-            services.AddControllers();
 
-            services.AddMediatR(typeof(AuthController).Assembly);
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+            services.AddMediatR(typeof(Startup).Assembly);
+
+            var loggerFactory = new LoggerFactory();
+            loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logs.txt"));
+            var logger = loggerFactory.CreateLogger<FileLogger>();
+            services.AddSingleton<ILogger>(logger);
+
+            services.AddAutoMapper(typeof(Startup));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -68,11 +80,14 @@ namespace Sheduler
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
             });
+
         }
     }
 }
