@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Sheduler.Controllers;
 using Sheduler.Model;
+using Sheduler.Services;
 using System;
 using System.IO;
 using Microsoft.Extensions.Logging;
@@ -66,6 +67,7 @@ namespace Sheduler
 
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddScoped<ToFormConverter>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
