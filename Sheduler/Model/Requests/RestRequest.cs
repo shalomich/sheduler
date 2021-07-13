@@ -1,4 +1,5 @@
-﻿using Sheduler.Model;
+﻿using Sheduler.Attributes;
+using Sheduler.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Sheduler.Model.Requests
 {
     public abstract class RestRequest : Request
     {
+        [FormField(FormFieldType.Select, false)]
         public User Replacing { set; get; }
         public int? ReplacingId { set; get; }
     }

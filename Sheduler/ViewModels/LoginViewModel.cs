@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+using Sheduler.Attributes;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
+    [FormModel]
     public class LoginViewModel
     {
         [Required]
         [EmailAddress]
+        [FormField(FormFieldType.Email)]
         public string Email { set; get; }
 
         [Required]
+        [FormField(FormFieldType.Password)]
         public string Password { set; get; }
 
         public void Deconstruct(out string email, out string password)

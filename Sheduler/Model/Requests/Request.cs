@@ -1,4 +1,5 @@
-﻿using Sheduler.Model;
+﻿using Sheduler.Attributes;
+using Sheduler.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,9 @@ namespace Sheduler.Model.Requests
         private RequestStatus _currentStatus = RequestStatus.Created;
         public int Id {set; get; }
         public abstract string Type { get; }
+        
         public RequestStatus Status => _currentStatus;
+        
         public ISet<DateTime> ChoosendDates { set; get; }
         
         public int? DayQuantity => ChoosendDates?.Count;
@@ -23,7 +26,7 @@ namespace Sheduler.Model.Requests
         public DateTime CreationDate { private set; get; } = DateTime.Now.Date;
         public DateTime? SendingDate
         {
-            set
+            set 
             {
                 if (value < CreationDate)
                     throw new ArgumentException();
@@ -36,6 +39,7 @@ namespace Sheduler.Model.Requests
         }
         public User Creator { set; get; }
         public int CreatorId {set; get; }        
+        public string Comment { set; get; }
         public User Approving { set; get; }
         public int? ApprovingId {set; get; }
 
