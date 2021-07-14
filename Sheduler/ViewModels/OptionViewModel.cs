@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sheduler.Model
+namespace Sheduler.ViewModels
 {
-    public interface IEntity
-    { 
-        public int Id { set; get; }
-    }
+    public record OptionViewModel(IEnumerable<OptionModel> Options);
 }

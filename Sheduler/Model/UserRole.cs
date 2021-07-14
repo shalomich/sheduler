@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Model
 {
-    public interface IEntity
-    { 
-        public int Id { set; get; }
+    public enum UserRole
+    {
+        Employee,
+        Admin,
+        Manager,
+        Director
     }
 }

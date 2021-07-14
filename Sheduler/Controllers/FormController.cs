@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sheduler.Attributes;
+using Sheduler.Attributes.GenericController;
 using Sheduler.RequestHandlers.Form.GetBuildingData;
 using Sheduler.Services;
 using System;
@@ -12,7 +13,7 @@ namespace Sheduler.Controllers
 {
     [ApiController]
     [Route("/form/[controller]")]
-    [GenericControllerName]
+    [GenericController(typeof(FormTypeStrategy))]
     public class FormController<T> : Controller
     {
         private IMediator Mediator { get; }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Model
 {
-    public class Post
+    public class Post : IEntity
     {
         public int Id { set; get; }
         public string Name { set; get; }

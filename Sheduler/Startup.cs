@@ -68,6 +68,8 @@ namespace Sheduler
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<ToFormConverter>();
+
+            services.AddTransient<UserProfileFactory>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

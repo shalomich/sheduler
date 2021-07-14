@@ -17,6 +17,8 @@ namespace Sheduler
         public DbSet<DayOffRequest> DayOffRequests { set; get; }
         public DbSet<RemoteWorkRequest> RemoteWorkRequests { set; get; }
         public DbSet<User> Users { set; get; }
+        public DbSet<Post> Posts { set; get; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }

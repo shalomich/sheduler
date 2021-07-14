@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sheduler.Model
+namespace Sheduler.RequestHandlers
 {
-    public interface IEntity
-    { 
+    public interface IByIdRequest
+    {
         public int Id { set; get; }
     }
 }
