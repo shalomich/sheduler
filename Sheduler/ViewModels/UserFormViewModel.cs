@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    [FormModel("User")]
+    [FormModel("user")]
     public class UserFormViewModel
     {       
         [FormField(FormFieldType.Email)]

@@ -17,8 +17,8 @@ using static Sheduler.RequestHandlers.ChangeStatusHandler;
 using static Sheduler.RequestHandlers.Crud.CreateHandler;
 using static Sheduler.RequestHandlers.Crud.UpdateHandler;
 using static Sheduler.RequestHandlers.GetAllRequestHandler;
+using static Sheduler.RequestHandlers.GetRequestByIdHandler;
 using static Sheduler.RequestHandlers.GetStatusesHandler;
-using static Sheduler.RequestHandlers.RequestByType.GetRequestByIdHandler;
 
 namespace Sheduler.Controllers
 {

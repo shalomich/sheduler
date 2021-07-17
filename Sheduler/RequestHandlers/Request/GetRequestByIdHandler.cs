@@ -9,9 +9,9 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using static Sheduler.RequestHandlers.RequestByType.GetRequestByIdHandler;
+using static Sheduler.RequestHandlers.GetRequestByIdHandler;
 
-namespace Sheduler.RequestHandlers.RequestByType
+namespace Sheduler.RequestHandlers
 {
     public class GetRequestByIdHandler : IRequestHandler<GetRequestByIdQuery, Request>
     {

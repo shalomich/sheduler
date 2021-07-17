@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    [FormModel("Login")]
+    [FormModel("login")]
     public record LoginViewModel
     {
         [Required]

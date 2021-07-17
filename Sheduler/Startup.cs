@@ -56,11 +56,11 @@ namespace Sheduler
             services.AddAuthorization();
 
             services.AddControllers()
-                .AddNewtonsoftJson(options => 
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
-                }).ConfigureApplicationPartManager(options => options.FeatureProviders.Add(new GenericControllerFeatureProvider()));
+                });
 
             services.AddMediatR(typeof(Startup).Assembly);
 

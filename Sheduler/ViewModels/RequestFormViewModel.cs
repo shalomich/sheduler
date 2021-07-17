@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    [FormModel("Request")]
+    [FormModel("request")]
     public class RequestFormViewModel
     {
         public int Id { set; get; }

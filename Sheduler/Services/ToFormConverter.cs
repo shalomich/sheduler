@@ -11,9 +11,16 @@ namespace Sheduler.Services
 {
     public class ToFormConverter
     {
-        public IEnumerable<object> Convert(Type modelType)
+        public record FormField(string Name, string Type, bool IsRequired);
+
+        public IEnumerable<FormField> Convert(string formModelName)
         {
-            PropertyInfo[] properties = modelType.GetProperties();
+            Type formModelType = GetType().Assembly.GetTypes()
+            .Single(type => type
+                .GetCustomAttribute<FormModelAttribute>()
+                    ?.FormModelName == formModelName);
+            
+            PropertyInfo[] properties = formModelType.GetProperties();
 
             var form = new HashSet<FormField>();
 
@@ -27,36 +34,13 @@ namespace Sheduler.Services
                 
                 form.Add(
                     new FormField(
-                        name: property.Name, 
-                        type: fieldAttribute.Type.ToString(),
-                        isRequired: fieldAttribute.IsRequired
+                        Name: property.Name, 
+                        Type: fieldAttribute.Type.ToString(),
+                        IsRequired: fieldAttribute.IsRequired
                     ));
             }
 
             return form;
-        }
-
-        private class FormField
-        {
-            public string Name { get; }
-            public string Type { get; }
-            public bool IsRequired { get; }
-            public FormField(string name, string type, bool isRequired)
-            {
-                Name = name ?? throw new ArgumentNullException(nameof(name));
-                Type = type ?? throw new ArgumentNullException(nameof(type));
-                IsRequired = isRequired;
-            }
-
-            public override bool Equals(object obj)
-            {
-                return obj is FormField field ? this.Name == field.Name : false;
-            }
-
-            public override int GetHashCode()
-            {
-                return HashCode.Combine(Name);
-            }
         }
     }
 
