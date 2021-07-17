@@ -1,10 +1,13 @@
 using Sheduler.Attributes;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    [FormModel]
-    public class LoginViewModel
+    public record LoginViewModel
     {
         [Required]
         [EmailAddress]
