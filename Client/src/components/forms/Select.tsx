@@ -3,7 +3,6 @@ import React from 'react'
 export type Option = {
     text: string,
     value: string,
-    isRequired : boolean
 }
 
 interface ISelect {
