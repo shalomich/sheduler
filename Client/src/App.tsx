@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
-const App = () => {
+const App : React.FC = ({children}) => {
   return (
-    <h1>Hello world!</h1>
+    <Fragment>
+      {children}
+    </Fragment> 
   );
 }
 
