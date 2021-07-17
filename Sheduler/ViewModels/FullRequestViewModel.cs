@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sheduler.Model.Requests;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Sheduler.ViewModels
     {
         public int Id { set; get; }
         public string Type { set; get; }
-        public string Status { set; get; }
+        public RequestStatus Status { set; get; }
         public ISet<DateTime> ChoosendDates { set; get; }
         public DateTime CreationDate { set; get; }
         public DateTime? SendingDate { set; get; }

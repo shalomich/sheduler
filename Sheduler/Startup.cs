@@ -17,6 +17,7 @@ using Sheduler.Extensions;
 using Sheduler.Services.Logger;
 using System.Text.Json.Serialization;
 using Sheduler.Middlewares.ExceptionHandler;
+using Newtonsoft.Json.Converters;
 
 namespace Sheduler
 {
@@ -55,8 +56,11 @@ namespace Sheduler
             services.AddAuthorization();
 
             services.AddControllers()
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-                .AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+                .AddNewtonsoftJson(options => 
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                }).ConfigureApplicationPartManager(options => options.FeatureProviders.Add(new GenericControllerFeatureProvider()));
 
             services.AddMediatR(typeof(Startup).Assembly);
 

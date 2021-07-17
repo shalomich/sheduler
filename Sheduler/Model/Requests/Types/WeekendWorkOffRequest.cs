@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Model.Requests
 {
-    [FormModel]
     public class WeekendWorkOffRequest : RestRequest
     {
         public override string Type => "В выходной за счет отработки";

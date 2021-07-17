@@ -1,4 +1,5 @@
-﻿using Sheduler.Model;
+﻿using AutoMapper;
+using Sheduler.Model;
 using Sheduler.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,17 @@ namespace Sheduler.Services
     {
         private ApplicationContext Context { get; }
 
-        public UserProfileFactory(ApplicationContext context)
+        private IMapper Mapper { get; }
+
+        public UserProfileFactory(ApplicationContext context, IMapper mapper)
         {
             Context = context ?? throw new ArgumentNullException(nameof(context));
+            Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public UserProfileViewModel Create(User user)
         {
-            var profile = new UserProfileViewModel(user);
-
-
-            return profile;
+            return Mapper.Map<UserProfileViewModel>(user);
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Model.Requests
 {
-    [FormModel]
     public class DayOffRequest : RestRequest
     {
         public override string Type => "На отгул";

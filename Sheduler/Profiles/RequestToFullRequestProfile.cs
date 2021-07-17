@@ -12,43 +12,26 @@ namespace Sheduler.Profiles
     {
         public RequestToFullRequestProfile()
         {
+            CreateMap<Request, FullRequestViewModel>()
+               .ForMember(view => view.ApprovingName,
+                   mapper => mapper.MapFrom(model => model.Approving.Name));
+            
+
+            CreateMap<RestRequest, FullRequestViewModel>()
+                 .ForMember(view => view.ReplacingName,
+                     mapper => mapper.MapFrom(model => model.Replacing.Name));
+
             CreateMap<VacationRequest, FullRequestViewModel>()
-               .ForMember(view => view.ApprovingName,
-                   mapper => mapper.MapFrom(model => model.Approving.Name))
-               .ForMember(view => view.Status,
-                   mapper => mapper.MapFrom(model => model.Status.ToString()))
-               .ForMember(view => view.ReplacingName,
-                   mapper => mapper.MapFrom(model => model.Replacing.Name));
-
+                .IncludeBase<RestRequest, FullRequestViewModel>();
             CreateMap<WeekendVacationRequest, FullRequestViewModel>()
-               .ForMember(view => view.ApprovingName,
-                   mapper => mapper.MapFrom(model => model.Approving.Name))
-               .ForMember(view => view.Status,
-                   mapper => mapper.MapFrom(model => model.Status.ToString()))
-               .ForMember(view => view.ReplacingName,
-                   mapper => mapper.MapFrom(model => model.Replacing.Name));
-
+                .IncludeBase<RestRequest, FullRequestViewModel>();
             CreateMap<WeekendWorkOffRequest, FullRequestViewModel>()
-               .ForMember(view => view.ApprovingName,
-                   mapper => mapper.MapFrom(model => model.Approving.Name))
-               .ForMember(view => view.Status,
-                   mapper => mapper.MapFrom(model => model.Status.ToString()))
-               .ForMember(view => view.ReplacingName,
-                   mapper => mapper.MapFrom(model => model.Replacing.Name));
-
+                .IncludeBase<RestRequest, FullRequestViewModel>();
             CreateMap<DayOffRequest, FullRequestViewModel>()
-               .ForMember(view => view.ApprovingName,
-                   mapper => mapper.MapFrom(model => model.Approving.Name))
-               .ForMember(view => view.Status,
-                   mapper => mapper.MapFrom(model => model.Status.ToString()))
-               .ForMember(view => view.ReplacingName,
-                   mapper => mapper.MapFrom(model => model.Replacing.Name));
-
+                .IncludeBase<RestRequest, FullRequestViewModel>();
             CreateMap<RemoteWorkRequest, FullRequestViewModel>()
-               .ForMember(view => view.ApprovingName,
-                   mapper => mapper.MapFrom(model => model.Approving.Name))
-               .ForMember(view => view.Status,
-                   mapper => mapper.MapFrom(model => model.Status.ToString()));
+                .IncludeBase<Request, FullRequestViewModel>();
+
         }
     }
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Model.Requests
 {
-    [FormModel]
     public class VacationRequest : RestRequest
     {
         public override string Type => "На отпуск";

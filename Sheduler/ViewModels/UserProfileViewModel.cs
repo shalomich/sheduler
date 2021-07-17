@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    public record UserProfileViewModel(User User)
+    public record UserProfileViewModel(int Id, string Email, string PhoneNumber,
+        string Name, UserRole Role, string Post) : UserSummaryViewModel(Id,Name,Role,Post)
     {
         public int  WorkedDaysPerYear {init; get; }
         public int UnusedVacationDaysPerYear {init; get; }
