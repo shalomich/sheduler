@@ -74,6 +74,8 @@ namespace Sheduler
             services.AddScoped<ToFormConverter>();
 
             services.AddTransient<UserProfileFactory>();
+
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -89,6 +91,8 @@ namespace Sheduler
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {
