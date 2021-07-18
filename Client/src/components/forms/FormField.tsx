@@ -1,17 +1,23 @@
-import React, { ChangeEvent, FormEvent, Fragment } from "react"
+import React from "react"
 import Select from '../forms/Select'
 
+export type FormFieldTemplate = {
+    name : string,
+    type : string,
+    isRequired : boolean,
+    metadata : any
+}
+
 type FormFieldType = {
-    name: string,
+    template : FormFieldTemplate
     value?: string,
-    type: string,
-    metadata: any | null,
-    isRequired: boolean
     onValueChange: (name: string, value: any) => void
 }
 
-const FormField : React.FC<FormFieldType> = ({name, value, type, metadata, isRequired, onValueChange}) => { 
+const FormField : React.FC<FormFieldType> = ({template, value, onValueChange}) => { 
     
+    const {name, type, isRequired, metadata} = template
+
     const changeHandler = (event : any) => onValueChange(name,event.target.value)
     
     let attributes : any = {name : name, onChange : changeHandler}
@@ -28,7 +34,7 @@ const FormField : React.FC<FormFieldType> = ({name, value, type, metadata, isReq
         case "textarea": 
             return <textarea {...attributes}></textarea>
         case "select": 
-            return <Select options={metadata.options} attributes={attributes} />
+            return <Select options={metadata} attributes={attributes} />
         default : 
             return <input {...inputAttributes}/>  
     } 
