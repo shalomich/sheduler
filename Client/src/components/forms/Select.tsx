@@ -5,16 +5,12 @@ export type Option = {
     value: string,
 }
 
-interface ISelect {
+type SelectType = {
     attributes : any,
     options : Array<Option>
 }
 
-interface IMultipleSelect extends ISelect {
-    onValueChange : (values : Array<string>) => void 
-}
-
-const Select : React.FC<ISelect> = ({attributes, options}) => {
+const Select : React.FC<SelectType> = ({attributes, options}) => {
     return (
         <select {...attributes} defaultValue="Выберите..." >
             <option disabled >Выберите...</option>

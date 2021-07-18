@@ -7,12 +7,15 @@ export type FormType = {
 }
 
 const GenerateForm = (template: Array<FormFieldTemplate>) => {
-    const Form : React.FC<FormType> = ({sendHandler, formData}) => {
+    const Form : React.FC<FormType> = ({sendHandler, formData = {}}) => {
+        
+        const [data, setData] = React.useState(formData)
+        
         const UpdateFormData = (name : string, value : any)  => {
 
             if (value)
-                formData[name] = value
-            else formData[name] = null   
+                data[name] = value
+            else data[name] = null   
         }
     
         return ( 
@@ -27,12 +30,12 @@ const GenerateForm = (template: Array<FormFieldTemplate>) => {
                             <span>{name}: </span>
                         </div>
                         <div>
-                            <FormField onValueChange={UpdateFormData} value={formData[name]} template={formField}/>
+                            <FormField onValueChange={UpdateFormData} value={data[name]} template={formField}/>
                         </div>
                     </Fragment>
                 }) 
             }
-            <button onClick={(event) => {event.preventDefault(); sendHandler(formData)}}>Send</button>
+            <button onClick={(event) => {event.preventDefault(); sendHandler(data)}}>Send</button>
             </form>
         ) 
     }
