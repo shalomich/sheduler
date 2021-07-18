@@ -24,10 +24,10 @@ namespace Sheduler.ViewModels
         [RegularExpression("^[А-ЯЁ][а-яё]* [А-ЯЁ][а-яё]* [А-ЯЁ][а-яё]*$")]
         public string Name { set; get; }
 
-        [FormField(FormFieldType.Select, false)]
+        [FormField(FormFieldType.Select, false, "/user/role")]
         public UserRole? Role { set; get; }
 
-        [FormField(FormFieldType.Select, false)]
+        [FormField(FormFieldType.Select, false, "/user/post")]
         public int? PostId { set; get; }
 
         [FormField(FormFieldType.Tel, false)]

@@ -11,7 +11,7 @@ namespace Sheduler.Services
 {
     public class ToFormConverter
     {
-        public record FormField(string Name, string Type, bool IsRequired);
+        public record FormField(string Name, string Type, bool IsRequired, string MetadataPath);
 
         public IEnumerable<FormField> Convert(string formModelName)
         {
@@ -36,7 +36,8 @@ namespace Sheduler.Services
                     new FormField(
                         Name: property.Name, 
                         Type: fieldAttribute.Type.ToString(),
-                        IsRequired: fieldAttribute.IsRequired
+                        IsRequired: fieldAttribute.IsRequired,
+                        MetadataPath: fieldAttribute.MetadataPath
                     ));
             }
 
