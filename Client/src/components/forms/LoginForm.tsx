@@ -18,7 +18,7 @@ const LoginForm : React.FC<ActionFormType> = ({uri, Form}) => {
     const {ShowErrors} = UseErrorContext()
 
     const Login = (formData : LoginFormData) => {
-        console.log(formData)
+        
         api(uri, {
             method: 'POST', 
             body: formData
