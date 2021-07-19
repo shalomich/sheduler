@@ -16,14 +16,20 @@ type FormFieldType = {
 
 const FormField : React.FC<FormFieldType> = ({template, value, onValueChange}) => { 
     
+    const [fieldValue, setFieldValue] = React.useState<any>(value)
+
     const {name, type, isRequired, metadata} = template
 
-    const changeHandler = (event : any) => onValueChange(name,event.target.value)
+    const changeHandler = (event : any) => {
+        const value = event.target.value
+        onValueChange(name,value)
+        setFieldValue(value)
+    } 
     
     let attributes : any = {name : name, onChange : changeHandler}
     
-    if (value)
-        attributes.value = value
+    if (fieldValue)
+        attributes.value = fieldValue
     
     if (isRequired)
         attributes.required = true 
