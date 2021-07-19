@@ -1,9 +1,12 @@
 import React, {Fragment} from 'react';
+import Account, {UseAuthorizedContext} from './components/Account';
 
 const App : React.FC = ({children}) => {
   return (
     <Fragment>
-      {children}
+      <Account>
+        {children}
+      </Account>
     </Fragment> 
   );
 }
