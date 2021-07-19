@@ -11,7 +11,6 @@ namespace Sheduler.Attributes
         public FormFieldType Type { get; }
         public bool IsRequired { get; }
         public string MetadataPath { get; }
-        
         public FormFieldAttribute(FormFieldType type, bool isRequired = true, string metadataPath = null)
         {
             Type = type;
