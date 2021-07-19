@@ -18,7 +18,7 @@ namespace Sheduler.ViewModels
         [Required]
         [Phone]
         [RegularExpression(@"8-9\d{2}-\d{3}-\d{2}-\d{2}")]
-        [FormField(FormFieldType.Password)]
+        [FormField(FormFieldType.Password, "Пароль")]
         public string PhoneNumber { init; get; }
     }
 }

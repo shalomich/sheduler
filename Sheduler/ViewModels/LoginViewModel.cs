@@ -16,7 +16,7 @@ namespace Sheduler.ViewModels
         public string Email { set; get; }
 
         [Required]
-        [FormField(FormFieldType.Password)]
+        [FormField(FormFieldType.Password, "Пароль")]
         public string Password { set; get; }
 
         public void Deconstruct(out string email, out string password)

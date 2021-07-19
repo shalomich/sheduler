@@ -10,19 +10,16 @@ using static Sheduler.RequestHandlers.GetRolesHandler;
 
 namespace Sheduler.RequestHandlers
 {
-    public class GetRolesHandler : IRequestHandler<GetRolesQuery, OptionViewModel>
+    public class GetRolesHandler : IRequestHandler<GetRolesQuery, IEnumerable<OptionModel>>
     {
-        public record GetRolesQuery() : IRequest<OptionViewModel>;
+        public record GetRolesQuery() : IRequest<IEnumerable<OptionModel>>;
 
-        public Task<OptionViewModel> Handle(GetRolesQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<OptionModel>> Handle(GetRolesQuery request, CancellationToken cancellationToken)
         {
             return Task.Run(() => 
             {
-                var options = Enum.GetValues<UserRole>()
-                    .Select(role => OptionModel.FromEnum(role))
-                    .ToList();
-
-                return new OptionViewModel(options);
+                return Enum.GetValues<UserRole>()
+                    .Select(role => OptionModel.FromEnum(role));
             });
         }
 

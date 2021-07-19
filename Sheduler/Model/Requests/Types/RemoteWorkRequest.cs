@@ -10,7 +10,6 @@ namespace Sheduler.Model.Requests
     {
         public override string Type => "На удаленную работу";
         
-        [FormField(FormFieldType.TextArea,false)]
         public string WorkingPlan { set; get; }
     }
 }

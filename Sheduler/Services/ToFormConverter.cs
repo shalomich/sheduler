@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Sheduler.Attributes;
+using Sheduler.Extensions;
 using Sheduler.Model;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Sheduler.Services
 {
     public class ToFormConverter
     {
-        public record FormField(string Name, string Type, bool IsRequired, string MetadataPath);
+        public record FormField(string Name, string Text, string Type, bool IsRequired, string Metadata);
 
         public IEnumerable<FormField> Convert(string formModelName)
         {
@@ -31,13 +32,15 @@ namespace Sheduler.Services
 
                 if (fieldAttribute == null)
                     continue;
-                
+
+                string name = property.Name.FirstCharToLowerCase();
                 form.Add(
                     new FormField(
-                        Name: property.Name, 
-                        Type: fieldAttribute.Type.ToString(),
+                        Name: name,
+                        Text: fieldAttribute.Text ?? name,
+                        Type: fieldAttribute.Type.ToString().ToLower(),
                         IsRequired: fieldAttribute.IsRequired,
-                        MetadataPath: fieldAttribute.MetadataPath
+                        Metadata: fieldAttribute.Metadata
                     ));
             }
 

@@ -5,12 +5,13 @@ export type FormFieldTemplate = {
     name : string,
     type : string,
     isRequired : boolean,
+    text : string,
     metadata : any
 }
 
 type FormFieldType = {
     template : FormFieldTemplate
-    value?: string,
+    value?: any,
     onValueChange: (name: string, value: any) => void
 }
 
@@ -25,11 +26,7 @@ const FormField : React.FC<FormFieldType> = ({template, value, onValueChange}) =
         onValueChange(name,value)
         setFieldValue(value)
     } 
-    
-    let attributes : any = {name : name, onChange : changeHandler}
-    
-    if (fieldValue)
-        attributes.value = fieldValue
+    let attributes : any = {name : name, onChange : changeHandler, value : fieldValue}
     
     if (isRequired)
         attributes.required = true 

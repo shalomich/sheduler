@@ -24,10 +24,14 @@ const GenerateForm = (template: Array<FormFieldTemplate>) => {
             {
                 template.map( formField => {
     
-                    const name = formField.name 
+                    const {name,text} = formField
+                    console.log(name);
+                    console.log(data[name]);
+                    
+                     
                     return <Fragment key={name}>
                         <div>
-                            <span>{name}: </span>
+                            <span>{text}: </span>
                         </div>
                         <div>
                             <FormField onValueChange={UpdateFormData} value={data[name]} template={formField}/>

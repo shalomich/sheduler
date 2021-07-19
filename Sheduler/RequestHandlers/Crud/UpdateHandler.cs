@@ -14,7 +14,12 @@ namespace Sheduler.RequestHandlers.Crud
     public class UpdateHandler : IRequestHandler<UpdateCommand, Unit>
     {
         public record UpdateCommand(int Id, IEntity Entity) : EntityCommand(Entity), IRequest<Unit>;
+
+        private const string WrongIdMessage = "Id from route and body are different";
+
         private ApplicationContext Context { get; }
+
+        
 
         public UpdateHandler(ApplicationContext context)
         {
@@ -27,7 +32,7 @@ namespace Sheduler.RequestHandlers.Crud
 
             if (entity.Id != id)
             {
-                throw new RestException("",HttpStatusCode.BadRequest);
+                throw new RestException(WrongIdMessage,HttpStatusCode.BadRequest);
             }
 
             try

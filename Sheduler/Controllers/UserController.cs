@@ -14,7 +14,7 @@ using static Sheduler.RequestHandlers.GetAllUsers.GetUserSummariesHandler;
 using static Sheduler.RequestHandlers.GetBusyDatesHandler;
 using static Sheduler.RequestHandlers.GetPostsHandler;
 using static Sheduler.RequestHandlers.GetRolesHandler;
-using static Sheduler.RequestHandlers.GetUserProfileByIdHandler;
+using static Sheduler.RequestHandlers.GetUserByIdHandler;
 
 namespace Sheduler.Controllers
 {
@@ -34,18 +34,25 @@ namespace Sheduler.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserProfileViewModel>> Get(int id)
         {
-            var profile = await Mediator.Send(new GetUserProfileByIdQuery(id));
-            return Ok(profile);
+            var user = await Mediator.Send(new GetUserByIdQuery(id));
+            return Ok(Mapper.Map<UserFormViewModel>(user));
+        }
+
+        [HttpGet("{id}/profile")]
+        public async Task<ActionResult<UserProfileViewModel>> GetProfile(int id)
+        {
+            var user = await Mediator.Send(new GetUserByIdQuery(id));
+            return Ok(Mapper.Map<UserProfileViewModel>(user));
         }
 
         [HttpGet("self")]
         [Authorize]
-        public async Task<ActionResult<UserProfileViewModel>> Get()
+        public async Task<ActionResult<UserProfileViewModel>> GetProfile()
         {
             int authorizedUserId = Convert.ToInt32(User.Claims
                     .First(claim => claim.Type == "id").Value);
 
-            return await Get(authorizedUserId);
+            return await GetProfile(authorizedUserId);
         }
 
 
@@ -64,11 +71,10 @@ namespace Sheduler.Controllers
 
             int id = await Mediator.Send(new CreateCommand(user));
 
-            return CreatedAtAction(nameof(Get), new {id}, user);
+            return CreatedAtAction(nameof(GetProfile), new {id}, user);
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> Update(int id, UserFormViewModel formModel)
         {
             User user = Mapper.Map<User>(formModel);
@@ -91,14 +97,14 @@ namespace Sheduler.Controllers
         }
 
         [HttpGet("post")]
-        public async Task<ActionResult<OptionViewModel>> GetPosts()
+        public async Task<ActionResult<IEnumerable<OptionModel>>> GetPosts()
         {
             var postOptions = await Mediator.Send(new GetPostsQuery());
             return Ok(postOptions);
         }
 
         [HttpGet("role")]
-        public async Task<ActionResult<OptionViewModel>> GetRoles()
+        public async Task<ActionResult<IEnumerable<OptionModel>>> GetRoles()
         {
             var roleOptions = await Mediator.Send(new GetRolesQuery());
 

@@ -15,6 +15,6 @@ namespace Sheduler.ViewModels
         public ISet<DateTime> ChoosendDates { set; get; }
         public int? DayQuantity { set; get; }
         public string ApprovingName { set; get; }
-        public RequestStatus Status { set; get; }
+        public string Status { set; get; }
     }
 }

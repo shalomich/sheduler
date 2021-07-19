@@ -11,18 +11,15 @@ using static Sheduler.RequestHandlers.GetStatusesHandler;
 
 namespace Sheduler.RequestHandlers
 {
-    public class GetStatusesHandler : IRequestHandler<GetStatusesQuery, OptionViewModel>
+    public class GetStatusesHandler : IRequestHandler<GetStatusesQuery, IEnumerable<OptionModel>>
     {
-        public record GetStatusesQuery() : IRequest<OptionViewModel>; 
-        public Task<OptionViewModel> Handle(GetStatusesQuery request, CancellationToken cancellationToken)
+        public record GetStatusesQuery() : IRequest<IEnumerable<OptionModel>>; 
+        public Task<IEnumerable<OptionModel>> Handle(GetStatusesQuery request, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
-                var options = Enum.GetValues<RequestStatus>()
-                    .Select(status => OptionModel.FromEnum(status))
-                    .ToList();
-
-                return new OptionViewModel(options);
+                return Enum.GetValues<RequestStatus>()
+                    .Select(status => OptionModel.FromEnum(status));
             });
         }
     }

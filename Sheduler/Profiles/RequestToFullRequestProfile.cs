@@ -14,8 +14,10 @@ namespace Sheduler.Profiles
         {
             CreateMap<Request, FullRequestViewModel>()
                .ForMember(view => view.ApprovingName,
-                   mapper => mapper.MapFrom(model => model.Approving.Name));
-            
+                   mapper => mapper.MapFrom(model => model.Approving.Name))
+               .ForMember(view => view.Status,
+                   mapper => mapper.MapFrom(model => model.Status.ToString()));
+
 
             CreateMap<RestRequest, FullRequestViewModel>()
                  .ForMember(view => view.ReplacingName,

@@ -11,10 +11,8 @@ namespace Sheduler.Model.Requests
     {
         public override string Type => "На отпуск";
         
-        [FormField(FormFieldType.Select)]
         public string VacationType { set; get; }
         
-        [FormField(FormFieldType.RadioButton)]
         public bool IsDateChangeable { set; get; } = false;
     }
 }

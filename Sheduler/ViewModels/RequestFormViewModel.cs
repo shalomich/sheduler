@@ -12,31 +12,31 @@ namespace Sheduler.ViewModels
     {
         public int Id { set; get; }
 
-        [FormField(FormFieldType.Select)]
+        [FormField(FormFieldType.Select, "Тип заявки")]
         public string Type { set; get; }
 
-        [FormField(FormFieldType.Date)]
+        [FormField(FormFieldType.Date, "Даты на заявку")]
         public ISet<DateTime> ChoosendDates { set; get; }
 
-        [FormField(FormFieldType.TextArea, false)]
+        [FormField(FormFieldType.TextArea, "Комментарий", false)]
         public string Comment { set; get; }
 
-        [FormField(FormFieldType.Select, false)]
+        [FormField(FormFieldType.Select, "Замещающий", false)]
         public int ReplacingId { set; get; }
 
-        [FormField(FormFieldType.Select, false)]
+        [FormField(FormFieldType.Select, "Согласующий", false)]
         public int ApprovingId { set; get; }
 
-        [FormField(FormFieldType.TextArea, false)]
+        [FormField(FormFieldType.TextArea, "Рабочий план", false)]
         public string WorkingPlan { set; get; }
 
-        [FormField(FormFieldType.Select)]
+        [FormField(FormFieldType.Select, "Тип отпуска")]
         public string VacationType { set; get; }
 
-        [FormField(FormFieldType.RadioButton)]
+        [FormField(FormFieldType.RadioButton, "Возможность редактирования дат согласующим")]
         public bool IsDateChangeable { set; get; } = false;
 
-        [FormField(FormFieldType.Date)]
+        [FormField(FormFieldType.Date, "Даты отработки")]
         public ISet<DateTime> WorkOffDates { set; get; }
     }
 }

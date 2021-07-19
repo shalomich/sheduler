@@ -59,7 +59,6 @@ namespace Sheduler
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
 
             services.AddMediatR(typeof(Startup).Assembly);

@@ -10,7 +10,7 @@ namespace Sheduler.ViewModels
     {
         public int Id { set; get; }
         public string Type { set; get; }
-        public RequestStatus Status { set; get; }
+        public string Status { set; get; }
         public ISet<DateTime> ChoosendDates { set; get; }
         public DateTime CreationDate { set; get; }
         public DateTime? SendingDate { set; get; }

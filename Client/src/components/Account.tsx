@@ -26,10 +26,7 @@ export const UseAuthorizedContext = () => React.useContext(AuthorizedContext);
 const Account : React.FC = ({children}) => {
     
     const [token, setToken] = React.useState(localStorage.getItem('token') ?? NoToken)
-
-    console.log(token);
-    
-    
+ 
     const IsAuthorized = () => token != NoToken 
 
     const SignIn = (token : string) => {

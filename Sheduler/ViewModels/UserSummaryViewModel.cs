@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    public record UserSummaryViewModel(int Id, string Name, UserRole Role,string Post);
+    public record UserSummaryViewModel(int Id, string Name, string Role,string Post);
 }

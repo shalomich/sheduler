@@ -12,7 +12,7 @@ namespace Sheduler.Profiles
     {
         public FormToUserProfile()
         {
-            CreateMap<UserFormViewModel, User>();
+            CreateMap<UserFormViewModel, User>().ReverseMap();
         }
     }
 }

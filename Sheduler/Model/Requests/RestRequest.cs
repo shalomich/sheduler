@@ -9,7 +9,6 @@ namespace Sheduler.Model.Requests
 {
     public abstract class RestRequest : Request
     {
-        [FormField(FormFieldType.Select, false)]
         public User Replacing { set; get; }
         public int? ReplacingId { set; get; }
     }

@@ -118,7 +118,7 @@ namespace Sheduler.Controllers
 
 
         [HttpGet("status")]
-        public async Task<ActionResult<OptionViewModel>> GetStatuses()
+        public async Task<ActionResult<IEnumerable<OptionModel>>> GetStatuses()
         {
             var statusOptions  = await Mediator.Send(new GetStatusesQuery());
 

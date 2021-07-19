@@ -13,27 +13,34 @@ export type ActionFormType = {
 type FormPageType = {
     formUri: string,
     actionUri: string,
-    FormComponent: React.FC<ActionFormType> 
+    FormComponent: React.FC<ActionFormType>,
+    match? : any 
 }
 
-const FormPage : React.FC<FormPageType> = ({formUri,actionUri, FormComponent}) => {
+const FormPage : React.FC<FormPageType> = ({formUri,actionUri, FormComponent, match}) => {
 
     const [template, setTemplate] = React.useState<Array<FormFieldTemplate>>()
     
     React.useEffect(() => {
         axios.get(formUri)
-            .then(responce => {
+            .then(async responce => {
                 const template : Array<FormFieldTemplate> = responce.data.template
-                
-                template.forEach(fieldTemplate => {
-                    const metadataPath : string = fieldTemplate.metadata 
-                    if (metadataPath)
-                        axios.get(baseApiUri + metadataPath)
-                            .then(responce => fieldTemplate.metadata = responce.data)
-                })
+    
+                for (var fieldTemplate of template){
+                    const metadataPath : string = fieldTemplate.metadata
+                    if (metadataPath) {
+                        const responce = await axios.get(baseApiUri + metadataPath)
+                        fieldTemplate.metadata = responce.data
+                    }
+                }
                 setTemplate(template) 
             }) 
     },[])
+
+    const id = match?.params?.id
+    
+    if (id != undefined)
+        actionUri = `${actionUri}${id}`
     
     if (template) {
         const form = GenerateForm(template)

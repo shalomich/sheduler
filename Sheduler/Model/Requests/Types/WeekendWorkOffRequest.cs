@@ -10,7 +10,6 @@ namespace Sheduler.Model.Requests
     {
         public override string Type => "В выходной за счет отработки";
         
-        [FormField(FormFieldType.Date)]
         public ISet<DateTime> WorkOffDates { set; get; }
     }
 }

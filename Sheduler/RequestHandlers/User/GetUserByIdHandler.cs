@@ -11,23 +11,23 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using static Sheduler.RequestHandlers.GetUserProfileByIdHandler;
+using static Sheduler.RequestHandlers.GetUserByIdHandler;
 
 namespace Sheduler.RequestHandlers
 {
-    public class GetUserProfileByIdHandler : IRequestHandler<GetUserProfileByIdQuery, UserProfileViewModel>
+    public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, User>
     {
-        public record GetUserProfileByIdQuery(int Id) : IRequest<UserProfileViewModel>;
+        public record GetUserByIdQuery(int Id) : IRequest<User>;
         private ApplicationContext Context { get; }
         private UserProfileFactory Factory { get; }
 
-        public GetUserProfileByIdHandler(ApplicationContext context, UserProfileFactory factory)
+        public GetUserByIdHandler(ApplicationContext context, UserProfileFactory factory)
         {
             Context = context ?? throw new ArgumentNullException(nameof(context));
             Factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        public async Task<UserProfileViewModel> Handle(GetUserProfileByIdQuery request, CancellationToken cancellationToken)
+        public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await Context.GetAllUsers()
             .SingleOrDefaultAsync(user => user.Id == request.Id);
@@ -35,7 +35,7 @@ namespace Sheduler.RequestHandlers
             if (user == null)
                 throw new RestException("", HttpStatusCode.NotFound);
 
-            return Factory.Create(user);
+            return user;
         }
     }
 }

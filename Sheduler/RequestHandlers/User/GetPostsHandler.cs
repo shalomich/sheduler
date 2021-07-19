@@ -11,9 +11,9 @@ using static Sheduler.RequestHandlers.GetPostsHandler;
 
 namespace Sheduler.RequestHandlers
 {
-    public class GetPostsHandler : IRequestHandler<GetPostsQuery, OptionViewModel>
+    public class GetPostsHandler : IRequestHandler<GetPostsQuery, IEnumerable<OptionModel>>
     {
-        public record GetPostsQuery() : IRequest<OptionViewModel>;
+        public record GetPostsQuery() : IRequest<IEnumerable<OptionModel>>;
         private ApplicationContext Context { get; }
 
         public GetPostsHandler(ApplicationContext context)
@@ -21,12 +21,10 @@ namespace Sheduler.RequestHandlers
             Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<OptionViewModel> Handle(GetPostsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<OptionModel>> Handle(GetPostsQuery request, CancellationToken cancellationToken)
         {
-            var options = await Context.Posts
-                .Select(post => new OptionModel(post.Name, post.Name)).ToListAsync();
-
-            return new OptionViewModel(options);
+            return await Context.Posts
+                .Select(post => new OptionModel(post.Name, post.Id.ToString())).ToListAsync();
         }
     }
 }

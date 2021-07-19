@@ -9,15 +9,16 @@ namespace Sheduler.Attributes
     public class FormFieldAttribute : Attribute
     {
         public FormFieldType Type { get; }
+        public string Text { get; }
         public bool IsRequired { get; }
-        public string MetadataPath { get; }
-        public FormFieldAttribute(FormFieldType type, bool isRequired = true, string metadataPath = null)
+        public string Metadata { get; }
+        public FormFieldAttribute(FormFieldType type, string text = null, bool isRequired = true, string metadata = null)
         {
             Type = type;
             IsRequired = isRequired;
-            MetadataPath = metadataPath;
+            Metadata = metadata;
+            Text = text;
         }
-
     }
 
     public enum FormFieldType
