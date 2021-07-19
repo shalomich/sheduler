@@ -35,6 +35,8 @@ namespace Sheduler.Middlewares.ExceptionHandler
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            string[] messages;
+
             if (exception is RestException restException)
             {
                 Logger.LogError(exception, "Rest error");
@@ -48,7 +50,7 @@ namespace Sheduler.Middlewares.ExceptionHandler
             
             context.Response.ContentType = "appliation/json";
 
-            string responce = JsonConvert.SerializeObject(new { error = exception.Message });
+            string responce = JsonConvert.SerializeObject(new { errors = new { Rest = new string[] {exception.Message} } });
             
             await context.Response.WriteAsync(responce);
             
