@@ -9,6 +9,8 @@ import SelfProfilePage from './components/pages/SelfProfilePage';
 import AddingForm from './components/forms/AddingForm';
 import EditForm from './components/forms/EditForm';
 import OtherProfilePage from './components/pages/OtherProfilePage';
+import TablePage from './components/pages/TablePage';
+import UserTable from './components/UserTable';
  
 ReactDOM.render(
     <BrowserRouter>
@@ -17,7 +19,7 @@ ReactDOM.render(
                 <Route path='/login' component={() => <FormPage formUri={loginFormUri} actionUri={loginUri} FormComponent={LoginForm}/>}/>
                 <Route exact path='/profile'/>
                 <Route path='/profile/edit' component={() => <FormPage formUri={selfFormUri} actionUri={selfProfileUri} FormComponent={EditForm}/>} />
-                <Route exact path='/user' />
+                <Route exact path='/user' component={() => <TablePage uri={userUri} TableComponent={UserTable}/>} />
                 <Route path='/user/add'component={() => <FormPage formUri={userFormUri} actionUri={userUri} FormComponent={AddingForm}/>} />
                 <Route exact path='/user/:id(\d*)' render={({match}) => <OtherProfilePage match={match}/>} />
                 <Route path='/user/:id/edit' render={({match}) => <FormPage formUri={userFormUri} actionUri={userUri} FormComponent={EditForm} match={match}/>} />
