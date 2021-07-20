@@ -17,7 +17,7 @@ namespace Sheduler.ViewModels
         public string ApprovingName { set; get; }
         public string Comment { set; get; }
         public string ReplacingName { set; get; }
-        
+        public int CreatorId { set; get; }
         public string WorkingPlan { set; get; }
 
         public string VacationType { set; get; }
