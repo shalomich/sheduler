@@ -18,6 +18,7 @@ using Sheduler.Services.Logger;
 using System.Text.Json.Serialization;
 using Sheduler.Middlewares.ExceptionHandler;
 using Newtonsoft.Json.Converters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Sheduler
 {
@@ -74,7 +75,17 @@ namespace Sheduler
 
             services.AddTransient<UserProfileFactory>();
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+                
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -85,14 +96,14 @@ namespace Sheduler
             }
             
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

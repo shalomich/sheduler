@@ -18,7 +18,7 @@ ReactDOM.render(
         <App>
             <Switch>
                 <Route path='/login' component={() => <FormPage formUri={loginFormUri} actionUri={loginUri} FormComponent={LoginForm}/>}/>
-                <Route exact path='/profile'/>
+                <Route exact path='/profile' component={SelfProfilePage}/>
                 <Route path='/profile/edit' component={() => <FormPage formUri={selfFormUri} actionUri={selfProfileUri} FormComponent={EditForm}/>} />
                 <Route exact path='/user' component={() => <TablePage uri={userUri} TableComponent={UserTable}/>} />
                 <Route path='/user/add'component={() => <FormPage formUri={userFormUri} actionUri={userUri} FormComponent={AddingForm}/>} />
