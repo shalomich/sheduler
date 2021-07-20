@@ -14,6 +14,7 @@ const AddingForm : React.FC<ActionFormType> = ({uri, Form}) => {
             method: 'POST', 
             body: formData
         }, undefined, SuccesStatus.Created)
+        .then(responce => window.location.href = window.location.pathname.replace('/add',''))
         .catch(async failure =>{
             const errorResponce = await failure
             ShowErrors(errorResponce.errors)

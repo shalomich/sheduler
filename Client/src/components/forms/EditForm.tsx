@@ -23,14 +23,14 @@ const EditForm : React.FC<ActionFormType> = ({uri, Form}) => {
             method: 'PUT', 
             body: formData
         }, undefined, SuccesStatus.NoContent)
-        .then(responce => responce)
+        .then(responce => window.location.href = window.location.pathname.replace('/edit',''))
         .catch(async failure =>{
-            console.log(failure.status);
-            
             const errorResponce = await failure
-        
-            if (errorResponce.errors)
+            const errors = errorResponce?.errors
+            
+            if(errors)
                 ShowErrors(errorResponce.errors)
+            else window.location.href = window.location.pathname.replace('/edit','')
         });  
     }
 

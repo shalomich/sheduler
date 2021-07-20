@@ -18,9 +18,14 @@ const TablePage = <T extends IModelTable>(props : TablePageType<T>) => {
             .then(responce => setModels(responce.data))
     },[])
 
+    const addingPath : string = window.location.pathname + '/add'
+
     if (models)
         return (
         <div>
+            <a href={addingPath}>
+                <button>Добавить</button>
+            </a>
             <TableComponent models={models}/>
         </div>)
     else return null
