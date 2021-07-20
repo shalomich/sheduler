@@ -12,6 +12,7 @@ import OtherProfilePage from './components/pages/OtherProfilePage';
 import TablePage from './components/pages/TablePage';
 import UserTable from './components/tables/UserTable';
 import RequestTable from './components/tables/RequestTable';
+import RequestPage from './components/pages/RequestPage';
  
 ReactDOM.render(
     <BrowserRouter>
@@ -26,7 +27,7 @@ ReactDOM.render(
                 <Route path='/user/:id/edit' render={({match}) => <FormPage formUri={userFormUri} actionUri={userUri} FormComponent={EditForm} match={match}/>} />
                 <Route exact path='/request' component={() => <TablePage uri={requestUri} TableComponent={RequestTable}/>} />
                 <Route path='/request/add' />
-                <Route exact path='/request/:id' />
+                <Route exact path='/request/:id' render={({match}) => <RequestPage match={match}/>}/>
                 <Route path='/request/:id/edit'/>    
             </Switch>
         </App>
