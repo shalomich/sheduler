@@ -18,7 +18,7 @@ namespace Sheduler.Profiles
                .ForMember(view => view.Role,
                    mapper => mapper.MapFrom(model => model.Role.ToString()));
 
-            CreateMap<User, UserProfileViewModel>()
+            CreateMap<User, UserDataModel>()
                 .IncludeBase<User, UserSummaryViewModel>();
         }
     }

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static Sheduler.RequestHandlers.Crud.CreateHandler;
 using static Sheduler.RequestHandlers.Crud.UpdateHandler;
-using static Sheduler.RequestHandlers.GetAllUsers.GetUserSummariesHandler;
+using static Sheduler.RequestHandlers.GetAllUsers.GetUsersHandler;
 using static Sheduler.RequestHandlers.GetBusyDatesHandler;
 using static Sheduler.RequestHandlers.GetPostsHandler;
 using static Sheduler.RequestHandlers.GetRolesHandler;
@@ -42,7 +42,11 @@ namespace Sheduler.Controllers
         public async Task<ActionResult<UserProfileViewModel>> GetProfile(int id)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(id));
-            return Ok(Mapper.Map<UserProfileViewModel>(user));
+            var profileModel = new UserProfileViewModel(
+                Data: Mapper.Map<UserDataModel>(user),
+                Statistics: new UserStatisticsModel(0,0,0,0)
+            );
+            return Ok(profileModel);
         }
 
         [HttpGet("self")]
@@ -59,9 +63,9 @@ namespace Sheduler.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserSummaryViewModel>>> GetAll()
         {
-            var userSummaries = await Mediator.Send(new GetUserSummariesQuery());
+            var users = await Mediator.Send(new GetUsersQuery());
 
-            return Ok(userSummaries);
+            return Ok(users.Select(user => Mapper.Map<UserSummaryViewModel>(user)));
         }  
 
         [HttpPost]
