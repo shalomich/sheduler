@@ -48,6 +48,9 @@ const Account : React.FC = ({children}) => {
 
     if (IsAuthorized() == false && window.location.pathname != AuthPath)
         window.location.href = AuthPath
+
+    console.log(GetAuthorizedData());
+    
     
     return (
         <AuthorizedContext.Provider value={{SignIn, SignOut, authorizedData: GetAuthorizedData()}}>

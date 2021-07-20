@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { requestUri } from "../apiConfig";
+import { DirectorRole, ManagerRole } from "../appConfig";
+import { GetAccessOrDestroyFC } from "../HOCs/GetAccess";
 import { UseAuthorizedContext } from "./Account";
 
 type RequestActionsType = {
@@ -23,11 +25,13 @@ const RequestActions : React.FC<RequestActionsType> = ({request, StatusChanged})
 
         axios.put(statusUri)
             .then(responce => StatusChanged(newStatus))
-    } 
+    }
+    
+    const RequestManagerOrDirectorActions = GetAccessOrDestroyFC([ManagerRole,DirectorRole], RequestOtherActions)
 
     if (creatorId == authorizedData?.id)
         return <RequestSelfActions currentStatus={currentStatus} changeStatus={ChangeStatus}/>
-    else return <RequestOtherActions currentStatus={currentStatus} changeStatus={ChangeStatus}/>  
+    else return <RequestManagerOrDirectorActions currentStatus={currentStatus} changeStatus={ChangeStatus}/>  
 }
 
 export default RequestActions

@@ -49,6 +49,7 @@ namespace Sheduler.RequestHandlers.Auth
             var claims = new List<Claim>
             {
                 new Claim("id", user.Id.ToString()),
+                new Claim("role", user.Role.ToString()),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString())
             };
             ClaimsIdentity identity = new ClaimsIdentity(claims, "Token",
