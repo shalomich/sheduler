@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import FormPage from './components/pages/FormPage';
-import { loginFormUri, loginUri, selfFormUri, selfProfileUri, userFormUri, userUri } from './apiConfig';
+import { loginFormUri, loginUri, requestUri, selfFormUri, selfProfileUri, userFormUri, userUri } from './apiConfig';
 import LoginForm from './components/forms/LoginForm';
 import SelfProfilePage from './components/pages/SelfProfilePage';
 import AddingForm from './components/forms/AddingForm';
 import EditForm from './components/forms/EditForm';
 import OtherProfilePage from './components/pages/OtherProfilePage';
 import TablePage from './components/pages/TablePage';
-import UserTable from './components/UserTable';
+import UserTable from './components/tables/UserTable';
+import RequestTable from './components/tables/RequestTable';
  
 ReactDOM.render(
     <BrowserRouter>
@@ -23,7 +24,7 @@ ReactDOM.render(
                 <Route path='/user/add'component={() => <FormPage formUri={userFormUri} actionUri={userUri} FormComponent={AddingForm}/>} />
                 <Route exact path='/user/:id(\d*)' render={({match}) => <OtherProfilePage match={match}/>} />
                 <Route path='/user/:id/edit' render={({match}) => <FormPage formUri={userFormUri} actionUri={userUri} FormComponent={EditForm} match={match}/>} />
-                <Route exact path='/requests' />
+                <Route exact path='/request' component={() => <TablePage uri={requestUri} TableComponent={RequestTable}/>} />
                 <Route path='/request/add' />
                 <Route exact path='/request/:id' />
                 <Route path='/request/:id/edit'/>    

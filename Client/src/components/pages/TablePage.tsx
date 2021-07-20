@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { userUri } from "../../apiConfig";
-import { IModelTable } from "../ModelTable";
+import { IModelTable } from "../tables/ModelTable";
 
 type TablePageType<T extends IModelTable> = {
     TableComponent: React.FC<{models: Array<T>}>,

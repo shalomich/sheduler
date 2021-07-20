@@ -14,5 +14,7 @@ export const loginUri : string = baseApiUri + 'auth/login'
 
 export const userUri : string = baseApiUri + 'user/'
 
+export const requestUri : string = baseApiUri + 'request/'
+
 export const selfProfileUri : string = userUri + 'self'
 
