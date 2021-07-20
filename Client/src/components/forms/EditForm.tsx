@@ -1,6 +1,7 @@
 import React from "react";
 import api, { SuccesStatus } from "../../api";
 import { UseErrorContext } from "../ErrorPresenter";
+import Loading from "../Loading";
 import { ActionFormType } from "../pages/FormPage";
 
 const EditForm : React.FC<ActionFormType> = ({uri, Form}) => {
@@ -38,7 +39,7 @@ const EditForm : React.FC<ActionFormType> = ({uri, Form}) => {
     
     if (model) 
         return <Form sendHandler={Edit} formData={model}/>
-    else return null
+    else return <Loading/>
 }
 
 export default EditForm

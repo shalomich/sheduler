@@ -4,6 +4,7 @@ import { baseApiUri } from "../../apiConfig";
 import GenerateForm, { FormType } from "../../HOCs/GenerateForm";
 import ErrorPresenter from "../ErrorPresenter";
 import { FormFieldTemplate } from "../forms/FormField";
+import Loading from "../Loading";
 
 export type ActionFormType = {
     uri : string,
@@ -49,9 +50,7 @@ const FormPage : React.FC<FormPageType> = ({formUri,actionUri, FormComponent, ma
                 <FormComponent Form={form} uri={actionUri}/>
             </ErrorPresenter>
         )  
-    }
-    
-    return null
+    } else return <Loading/>
 }
 
 export default FormPage

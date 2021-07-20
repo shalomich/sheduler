@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import api from "../../api";
 import { selfProfileUri, userUri } from "../../apiConfig";
 import { UseAuthorizedContext } from "../Account";
+import Loading from "../Loading";
 import UserProfile, { IUserProfile } from "../UserProfile";
 
 const OtherProfilePage : React.FC<{match : any}> = ({match}) => {
@@ -29,7 +30,7 @@ const OtherProfilePage : React.FC<{match : any}> = ({match}) => {
                 </a>
             </div>
         ) 
-    else return null
+    else return <Loading/>
 }
 
 export default OtherProfilePage

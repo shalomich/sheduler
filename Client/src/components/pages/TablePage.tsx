@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { userUri } from "../../apiConfig";
+import Loading from "../Loading";
 import { IModelTable } from "../tables/ModelTable";
 
 type TablePageType<T extends IModelTable> = {
@@ -28,7 +29,7 @@ const TablePage = <T extends IModelTable>(props : TablePageType<T>) => {
             </a>
             <TableComponent models={models}/>
         </div>)
-    else return null
+    else return <Loading/>
 }
 
 export default TablePage
