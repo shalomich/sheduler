@@ -9,6 +9,7 @@ using Sheduler.Model.Requests;
 using Sheduler.RequestHandlers;
 using Sheduler.RequestHandlers.Crud.GetById;
 using Sheduler.ViewModels;
+using Sheduler.ViewModels.RequestForm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ using static Sheduler.RequestHandlers.Crud.UpdateHandler;
 using static Sheduler.RequestHandlers.GetAllRequestHandler;
 using static Sheduler.RequestHandlers.GetRequestByIdHandler;
 using static Sheduler.RequestHandlers.GetStatusesHandler;
+using static Sheduler.RequestHandlers.GetVacationTypesHandler;
 
 namespace Sheduler.Controllers
 {
@@ -62,9 +64,9 @@ namespace Sheduler.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Request>> Create(RequestFormViewModel fullRequestModel)
+        public async Task<ActionResult<Request>> Create([FromQuery] string type, [FromBody]FullRequestFormViewModel fullRequestModel)
         {
-            Request request = Mapper.MapRequestFromForm(fullRequestModel);
+            Request request = Mapper.MapRequestFromForm(type, fullRequestModel);
 
             request.CreatorId = UserId;
 
@@ -73,11 +75,11 @@ namespace Sheduler.Controllers
             return Created("", request);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{type}/{id}")]
         [Authorize]
-        public async Task<ActionResult<Request>> Update(int id, RequestFormViewModel fullRequestModel)
+        public async Task<ActionResult<Request>> Update(string type, int id, FullRequestFormViewModel fullRequestModel)
         {
-            Request request = Mapper.MapRequestFromForm(fullRequestModel);
+            Request request = Mapper.MapRequestFromForm(type, fullRequestModel);
 
             request.CreatorId = UserId;
 
@@ -124,6 +126,14 @@ namespace Sheduler.Controllers
             var statusOptions  = await Mediator.Send(new GetStatusesQuery());
 
             return Ok(statusOptions);
+        }
+
+        [HttpGet("vacationType")]
+        public async Task<ActionResult<IEnumerable<OptionModel>>> GetVacationTypes()
+        {
+            var vacationTypeOptions = await Mediator.Send(new GetVacationTypesQuery());
+
+            return Ok(vacationTypeOptions);
         }
     }
 }

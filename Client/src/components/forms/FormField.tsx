@@ -1,5 +1,7 @@
 import React from "react"
 import Select from '../forms/Select'
+import BinaryRadioGroup from "./BinaryRadioGroup"
+import Calendar from "./Calendar"
 
 export type FormFieldTemplate = {
     name : string,
@@ -38,6 +40,10 @@ const FormField : React.FC<FormFieldType> = ({template, value, onValueChange}) =
             return <textarea {...attributes}></textarea>
         case "select": 
             return <Select options={metadata} attributes={attributes} />
+        case "radio":
+            return <BinaryRadioGroup name={name} value={value} onValueChange={onValueChange}/>
+        case "date":
+            return <Calendar name={name} onValueChange={onValueChange}/>
         default : 
             return <input {...inputAttributes}/>  
     } 

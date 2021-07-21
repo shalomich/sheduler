@@ -12,10 +12,14 @@ const GenerateForm = (template: Array<FormFieldTemplate>) => {
         const [data, setData] = React.useState(formData)
         
         const UpdateFormData = (name : string, value : any)  => {
-
-            if (value)
+            console.log(value);
+            
+            if (value !== undefined)
                 data[name] = value
-            else data[name] = null   
+            else data[name] = null
+            
+            console.log(data);
+            
         }
     
         return ( 
@@ -25,10 +29,7 @@ const GenerateForm = (template: Array<FormFieldTemplate>) => {
                 template.map( formField => {
     
                     const {name,text} = formField
-                    console.log(name);
-                    console.log(data[name]);
                     
-                     
                     return <Fragment key={name}>
                         <div>
                             <span>{text}: </span>

@@ -1,7 +1,9 @@
 import axios from "axios";
 import React from "react";
+import api from "../../api";
 import { baseApiUri } from "../../apiConfig";
 import GenerateForm, { FormType } from "../../HOCs/GenerateForm";
+import { UseAuthorizedContext } from "../Account";
 import ErrorPresenter from "../ErrorPresenter";
 import { FormFieldTemplate } from "../forms/FormField";
 import Loading from "../Loading";
@@ -21,6 +23,8 @@ type FormPageType = {
 const FormPage : React.FC<FormPageType> = ({formUri,actionUri, FormComponent, match}) => {
 
     const [template, setTemplate] = React.useState<Array<FormFieldTemplate>>()
+
+    const {authorizedData} = UseAuthorizedContext()
     
     React.useEffect(() => {
         axios.get(formUri)
@@ -30,8 +34,8 @@ const FormPage : React.FC<FormPageType> = ({formUri,actionUri, FormComponent, ma
                 for (var fieldTemplate of template){
                     const metadataPath : string = fieldTemplate.metadata
                     if (metadataPath) {
-                        const responce = await axios.get(baseApiUri + metadataPath)
-                        fieldTemplate.metadata = responce.data
+                        const responce = await api(baseApiUri + metadataPath,{},authorizedData?.token)
+                        fieldTemplate.metadata = responce
                     }
                 }
                 setTemplate(template) 

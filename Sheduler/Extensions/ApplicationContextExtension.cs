@@ -22,7 +22,7 @@ namespace Sheduler.Extensions
                 context.WeekendVacationRequests,
                 context.WeekendWorkOffRequests,
                 context.DayOffRequests,
-                context.DayOffRequests
+                context.RemoteWorkRequests
             };
 
             IEnumerable<Request> allRequests = new List<Request>();

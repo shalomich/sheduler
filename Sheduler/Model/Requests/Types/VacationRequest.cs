@@ -11,7 +11,7 @@ namespace Sheduler.Model.Requests
     {
         public override string Type => "На отпуск";
         
-        public string VacationType { set; get; }
+        public VacationType VacationType { set; get; }
         
         public bool IsDateChangeable { set; get; } = false;
     }

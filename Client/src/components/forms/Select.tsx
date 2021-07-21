@@ -11,10 +11,11 @@ type SelectType = {
 }
 
 const Select : React.FC<SelectType> = ({attributes, options}) => {
+    
     return (
         <select {...attributes} defaultValue="Выберите..." >
             <option disabled >Выберите...</option>
-            {options.map(option => <option key={option.value} value={option.value}>{option.text}</option>)}
+            {options?.map(option => <option key={option.value} value={option.value}>{option.text}</option>)}
         </select>
     )
 }

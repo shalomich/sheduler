@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 using static Sheduler.RequestHandlers.Crud.CreateHandler;
 using static Sheduler.RequestHandlers.Crud.UpdateHandler;
 using static Sheduler.RequestHandlers.GetAllUsers.GetUsersHandler;
+using static Sheduler.RequestHandlers.GetApprovingHandler;
 using static Sheduler.RequestHandlers.GetBusyDatesHandler;
 using static Sheduler.RequestHandlers.GetPostsHandler;
+using static Sheduler.RequestHandlers.GetReplacingHandler;
 using static Sheduler.RequestHandlers.GetRolesHandler;
 using static Sheduler.RequestHandlers.GetUserByIdHandler;
 
@@ -123,5 +125,28 @@ namespace Sheduler.Controllers
 
             return Ok(busyDates);
         }
+
+        private int UserId => Convert.ToInt32(User.Claims
+            .Single(claim => claim.Type == "id").Value);
+
+
+        [HttpGet("approving")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<OptionModel>>> GetApprovings()
+        {
+            var approvings = await Mediator.Send(new GetApprovingQuery(UserId));
+
+            return Ok(approvings);
+        }
+
+        [HttpGet("replacing")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<OptionModel>>> GetReplacings()
+        {
+            var replacings = await Mediator.Send(new GetReplacingQuery(UserId));
+
+            return Ok(replacings);
+        }
+
     }
 }

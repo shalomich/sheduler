@@ -32,6 +32,6 @@ namespace Sheduler.Attributes
         Password,
         Tel,
         Date,
-        RadioButton
+        Radio
     }
 }
