@@ -12,13 +12,15 @@ type AuthorizedDataType = {
 type AuthorizedContextType = {
     authorizedData: AuthorizedDataType | undefined
     SignIn: (token : string) => void,
-    SignOut: () => void
+    SignOut: () => void,
+    IsAuthorized: () => boolean
 }
 
 const AuthorizedContext = React.createContext<AuthorizedContextType>({
     authorizedData: undefined,
     SignIn: (token) => {},
-    SignOut: () => {}
+    SignOut: () => {},
+    IsAuthorized: () => false
 });
 
 export const UseAuthorizedContext = () => React.useContext(AuthorizedContext);
@@ -34,7 +36,10 @@ const Account : React.FC = ({children}) => {
         setToken(token)   
     }
 
-    const SignOut = () => setToken(NoToken)
+    const SignOut = () => {
+        localStorage.removeItem('token')
+        setToken(NoToken)  
+    } 
 
     const GetAuthorizedData = () => {
         if (IsAuthorized()) 
@@ -49,11 +54,8 @@ const Account : React.FC = ({children}) => {
     if (IsAuthorized() == false && window.location.pathname != AuthPath)
         window.location.href = AuthPath
 
-    console.log(GetAuthorizedData());
-    
-    
     return (
-        <AuthorizedContext.Provider value={{SignIn, SignOut, authorizedData: GetAuthorizedData()}}>
+        <AuthorizedContext.Provider value={{SignIn, SignOut, authorizedData: GetAuthorizedData(), IsAuthorized}}>
             {children}
         </AuthorizedContext.Provider>
     )    
