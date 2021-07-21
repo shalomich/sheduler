@@ -61,9 +61,10 @@ namespace Sheduler.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Manager, Director")]
         public async Task<ActionResult<IEnumerable<UserSummaryViewModel>>> GetAll()
         {
-            var users = await Mediator.Send(new GetUsersQuery());
+            var users = await Mediator.Send(new GetUsersQuery(User.IsInRole(UserRole.Manager.ToString())));
 
             return Ok(users.Select(user => Mapper.Map<UserSummaryViewModel>(user)));
         }  

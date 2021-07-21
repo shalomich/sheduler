@@ -15,7 +15,7 @@ namespace Sheduler.RequestHandlers.GetAllUsers
 {
     public class GetUsersHandler : IRequestHandler<GetUsersQuery, IEnumerable<User>>
     {
-        public record GetUsersQuery() : IRequest<IEnumerable<User>>;
+        public record GetUsersQuery(bool IsManager) : IRequest<IEnumerable<User>>;
         private ApplicationContext Context { get; }
         private IMapper Mapper { get; }
 
@@ -27,7 +27,12 @@ namespace Sheduler.RequestHandlers.GetAllUsers
 
         public async Task<IEnumerable<User>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            return await Context.GetAllUsers().ToListAsync();
+            var allUsers = Context.GetAllUsers();
+
+            if (request.IsManager)
+                allUsers = allUsers.Where(user => user.Role == UserRole.Employee);
+
+            return await allUsers.ToListAsync();
 
         }
     }

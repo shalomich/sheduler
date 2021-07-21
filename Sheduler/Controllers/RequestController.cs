@@ -35,10 +35,14 @@ namespace Sheduler.Controllers
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        private int UserId => Convert.ToInt32(User.Claims
+            .Single(claim => claim.Type == "id").Value);
+
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<CommonRequestViewModel>>> GetAll()
         {
-            var requests = await Mediator.Send(new GetAllRequestQuery());
+            var requests = await Mediator.Send(new GetAllRequestQuery(UserId, User.IsInRole(UserRole.Employee.ToString())));
 
             var requestViews = requests.Select(request => Mapper.Map<CommonRequestViewModel>(request));
 
@@ -55,9 +59,6 @@ namespace Sheduler.Controllers
             
             return Ok(fullRequest);
         }
-
-        private int UserId => Convert.ToInt32(User.Claims
-                .Single(claim => claim.Type == "id").Value);
 
         [HttpPost]
         [Authorize]
