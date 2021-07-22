@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Sheduler.Middlewares.ExceptionHandler;
 using Sheduler.Model;
 using System;

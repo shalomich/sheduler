@@ -35,6 +35,8 @@ namespace Sheduler
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddTransient<ApplicationContext>();
+
             services.Configure<AuthOptions>(Configuration.GetSection(nameof(AuthOptions)));
 
             AuthOptions authOptions = Configuration.GetSection(nameof(AuthOptions)).Get<AuthOptions>();
@@ -101,7 +103,7 @@ namespace Sheduler
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             
             app.UseEndpoints(endpoints =>

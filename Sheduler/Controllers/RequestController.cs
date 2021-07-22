@@ -54,13 +54,31 @@ namespace Sheduler.Controllers
 
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<FullRequestViewModel>> GetById(int id)
+        public async Task<ActionResult<FullRequestFormViewModel>> GetById(int id)
         {
             Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
 
-            var fullRequest = Mapper.Map(requestById, requestById.GetType(), typeof(FullRequestViewModel));
+            var fullRequest = Mapper.Map<FullRequestFormViewModel>(requestById);
             
             return Ok(fullRequest);
+        }
+
+        [HttpGet("{id}/profile")]
+        public async Task<ActionResult<FullRequestViewModel>> GetRequestProfileById(int id)
+        {
+            Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
+
+            var requestProfile = Mapper.Map(requestById, requestById.GetType(), typeof(FullRequestViewModel));
+
+            return Ok(requestProfile);
+        }
+
+        [HttpGet("{id}/type")]
+        public async Task<ActionResult<string>> GetRequestType(int id)
+        {
+            Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
+           
+            return Ok(requestById.GetType().Name.ToString().FirstCharToLowerCase());
         }
 
         [HttpPost]
@@ -78,9 +96,9 @@ namespace Sheduler.Controllers
             return Created("", request);
         }
 
-        [HttpPut("{type}/{id}")]
+        [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<Request>> Update(string type, int id, FullRequestFormViewModel fullRequestModel)
+        public async Task<ActionResult<Request>> Update([FromQuery] string type, [FromRoute] int id, [FromBody] FullRequestFormViewModel fullRequestModel)
         {
             Request request = Mapper.MapRequestFromForm(type, fullRequestModel);
 

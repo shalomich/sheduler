@@ -31,8 +31,13 @@ namespace Sheduler.RequestHandlers
         {
             Request choosenRequest = request.Request;
 
-            var busyDates = await Context.GetBusyDatesAsync(choosenRequest.CreatorId);
-            
+            IEnumerable<Request> allRequests = await Context.GetAllRequestsAsync();
+
+            var busyDates = allRequests
+                .Where(request => request.CreatorId == choosenRequest.CreatorId && request.Id != choosenRequest.Id)
+                .Select(request => request.ChoosendDates)
+                .Aggregate(new HashSet<DateTime>(), (dates1, dates2) => dates2.Count != 0 ? dates1.Concat(dates2).ToHashSet() : dates1);
+
             CheckDates(busyDates, choosenRequest.ChoosendDates, BusyDatesMessage);
 
             if (choosenRequest is WeekendWorkOffRequest workOffRequest)

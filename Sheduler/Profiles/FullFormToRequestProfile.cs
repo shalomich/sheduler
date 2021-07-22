@@ -13,11 +13,16 @@ namespace Sheduler.Profiles
     {
         public FormFullRequestProfile()
         {
-            CreateMap<FullRequestFormViewModel, VacationRequest>();
-            CreateMap<FullRequestFormViewModel, WeekendVacationRequest>();
-            CreateMap<FullRequestFormViewModel, WeekendWorkOffRequest>();
-            CreateMap<FullRequestFormViewModel, DayOffRequest>();
-            CreateMap<FullRequestFormViewModel, RemoteWorkRequest>();
+            CreateMap<FullRequestFormViewModel, VacationRequest>()
+                .ReverseMap();
+            CreateMap<FullRequestFormViewModel, WeekendVacationRequest>()
+                .ReverseMap();
+            CreateMap<FullRequestFormViewModel, WeekendWorkOffRequest>()
+                .ReverseMap();
+            CreateMap<FullRequestFormViewModel, DayOffRequest>()
+                .ReverseMap();
+            CreateMap<FullRequestFormViewModel, RemoteWorkRequest>()
+                .ReverseMap();
         }
     }
 }

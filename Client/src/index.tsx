@@ -16,6 +16,7 @@ import RequestPage from './components/pages/RequestPage';
 import { GetAccessOrBack } from './HOCs/GetAccess';
 import { AdminRole, RolesWithoutEmployee } from './appConfig';
 import RequestAddingPage from './components/pages/RequestAddingPage';
+import RequestEditPage from './components/pages/RequestEditPage';
 
 const UserTablePage = GetAccessOrBack(RolesWithoutEmployee,TablePage)
 const UserAddingPage = GetAccessOrBack([AdminRole],FormPage)
@@ -37,7 +38,7 @@ ReactDOM.render(
                 <Route exact path='/request' component={() => <TablePage uri={requestUri} TableComponent={RequestTable}/>} />
                 <Route path='/request/add' component={RequestAddingPage} />
                 <Route exact path='/request/:id' render={({match}) => <RequestPage match={match}/>}/>
-                <Route path='/request/:id/edit'/>    
+                <Route path='/request/:id/edit' render={({match}) => <RequestEditPage match={match}/>}/>    
             </Switch>
         </App>
     </BrowserRouter>

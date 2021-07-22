@@ -11,7 +11,7 @@ const RequestPage : React.FC<{match : any}> = ({match}) => {
     
     const[request, setRequest] = React.useState<any>()
 
-    const uri = requestUri + match.params.id
+    const uri = requestUri + match.params.id + '/profile'
     
     React.useEffect(()=>{
         axios.get(uri)
