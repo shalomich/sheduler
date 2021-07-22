@@ -12,7 +12,6 @@ const GenerateForm = (template: Array<FormFieldTemplate>) => {
         const [data, setData] = React.useState(formData)
         
         const UpdateFormData = (name : string, value : any)  => {
-            console.log(value);
             
             if (value !== undefined)
                 data[name] = value

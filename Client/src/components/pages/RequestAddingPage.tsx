@@ -20,9 +20,7 @@ const RequestAddingPage : React.FC = () => {
     
     const requestFormUri = formUri + requestType
     
-    const requestAddingUri = baseApiUri + `request?type=${requestType}`
-    console.log(requestAddingUri);
-     
+    const requestAddingUri = baseApiUri + `request?type=${requestType}` 
 
     return (
         <div>

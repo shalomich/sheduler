@@ -43,7 +43,7 @@ const FormField : React.FC<FormFieldType> = ({template, value, onValueChange}) =
         case "radio":
             return <BinaryRadioGroup name={name} value={value} onValueChange={onValueChange}/>
         case "date":
-            return <Calendar name={name} onValueChange={onValueChange}/>
+            return <Calendar value={value} name={name} onValueChange={onValueChange}/>
         default : 
             return <input {...inputAttributes}/>  
     } 

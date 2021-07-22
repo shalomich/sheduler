@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static Sheduler.RequestHandlers.ChangeStatusHandler;
+using static Sheduler.RequestHandlers.CheckRequestDatesValidityHandler;
 using static Sheduler.RequestHandlers.Crud.CreateHandler;
 using static Sheduler.RequestHandlers.Crud.UpdateHandler;
 using static Sheduler.RequestHandlers.GetAllRequestHandler;
@@ -70,6 +71,8 @@ namespace Sheduler.Controllers
 
             request.CreatorId = UserId;
 
+            await Mediator.Send(new CheckRequestDatesValidityCommand(request));
+
             int id = await Mediator.Send(new CreateCommand(request));
 
             return Created("", request);
@@ -82,6 +85,8 @@ namespace Sheduler.Controllers
             Request request = Mapper.MapRequestFromForm(type, fullRequestModel);
 
             request.CreatorId = UserId;
+
+            await Mediator.Send(new CheckRequestDatesValidityCommand(request));
 
             await Mediator.Send(new UpdateCommand(id, request));
 

@@ -1,4 +1,6 @@
-﻿using Sheduler.Model.Requests;
+﻿using Newtonsoft.Json;
+using Sheduler.Model.Requests;
+using Sheduler.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,8 @@ namespace Sheduler.ViewModels
         public int Id { set; get; }
         public string CreatorName { set; get; }
         public string Type { set; get; }
-        public DateTime? SendingDate { set; get; }
-        public ISet<DateTime> ChoosendDates { set; get; }
+        public string SendingDate { set; get; }        
+        public string ChoosendDates { set; get; }
         public int? DayQuantity { set; get; }
         public string ApprovingName { set; get; }
         public string Status { set; get; }

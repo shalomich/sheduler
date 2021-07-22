@@ -20,7 +20,7 @@ namespace Sheduler.ViewModels
         public int CreatorId { set; get; }
         public string WorkingPlan { set; get; }
 
-        public string VacationType { set; get; }
+        public VacationType VacationType { set; get; }
 
         public bool? IsDateChangeable { set; get; }
 

@@ -13,6 +13,7 @@ namespace Sheduler.DbConfigs
         public void Configure(EntityTypeBuilder<VacationRequest> builder)
         {
             builder.Property(request => request.VacationType).IsRequired();
+            builder.Property(request => request.VacationType).HasConversion<string>();
             builder.Property(request => request.IsDateChangeable).IsRequired();
         }
     }
