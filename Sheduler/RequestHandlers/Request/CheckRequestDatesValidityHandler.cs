@@ -31,16 +31,9 @@ namespace Sheduler.RequestHandlers
         {
             Request choosenRequest = request.Request;
 
-            IEnumerable<Request> allRequests = await Context.GetAllRequestsAsync();
-
-            var busyDates = allRequests
-                .Where(userRequest => userRequest.CreatorId == choosenRequest.CreatorId)
-                .Select(userRequest => userRequest.ChoosendDates)
-                .ToList();
-
-            var a = busyDates.Aggregate(new HashSet<DateTime>(),(dates1, dates2) => dates2.Count != 0 ? dates1.Concat(dates2).ToHashSet() : dates1);
-
-            CheckDates(a, choosenRequest.ChoosendDates, BusyDatesMessage);
+            var busyDates = await Context.GetBusyDatesAsync(choosenRequest.CreatorId);
+            
+            CheckDates(busyDates, choosenRequest.ChoosendDates, BusyDatesMessage);
 
             if (choosenRequest is WeekendWorkOffRequest workOffRequest)
             {
@@ -48,7 +41,7 @@ namespace Sheduler.RequestHandlers
                     throw new RestException("Количество дней по заявке и отработке должны быть равны", HttpStatusCode.BadRequest);
 
                 CheckDates(workOffRequest.ChoosendDates, workOffRequest.WorkOffDates, ChoosenDatesMessage);
-                CheckDates(a, workOffRequest.WorkOffDates, BusyDatesMessage);
+                CheckDates(busyDates, workOffRequest.WorkOffDates, BusyDatesMessage);
             }
 
             return Unit.Value;

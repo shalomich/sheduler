@@ -40,5 +40,16 @@ namespace Sheduler.Extensions
         {
             return context.Users.Include(user => user.Post);
         }
+
+        public static async Task<IEnumerable<DateTime>> GetBusyDatesAsync(this ApplicationContext context, int userId)
+        {
+            IEnumerable<Request> allRequests = await context.GetAllRequestsAsync();
+
+            return allRequests
+                .Where(request => request.CreatorId == userId)
+                .Select(request => request.ChoosendDates)
+                .Aggregate(new HashSet<DateTime>(), (dates1, dates2) => dates2.Count != 0 ? dates1.Concat(dates2).ToHashSet() : dates1);
+
+        }
     }
 }

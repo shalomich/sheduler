@@ -18,8 +18,11 @@ namespace Sheduler.Profiles
                .ForMember(view => view.Role,
                    mapper => mapper.MapFrom(model => model.Role.ToString()));
 
-            CreateMap<User, UserDataModel>()
-                .IncludeBase<User, UserSummaryViewModel>();
+            CreateMap<User, UserProfileViewModel>()
+               .ForMember(view => view.Post,
+                       mapper => mapper.MapFrom(model => model.Post.Name))
+                .ForMember(view => view.Role,
+                    mapper => mapper.MapFrom(model => model.Role.ToString()));
         }
     }
 }

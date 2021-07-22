@@ -4,16 +4,16 @@ import api from "../../api";
 import { selfProfileUri } from "../../apiConfig";
 import { UseAuthorizedContext } from "../Account";
 import Loading from "../Loading";
-import UserProfile, { IUserProfile } from "../UserProfile";
+import UserProfile from "../UserProfile";
 
 const SelfProfilePage : React.FC = () => {
     
-    const[profile, setProfile] = React.useState<IUserProfile>();
+    const[profile, setProfile] = React.useState<any>();
     const {authorizedData} = UseAuthorizedContext() 
 
     React.useEffect(() => {
         api(selfProfileUri,{method: 'GET'},authorizedData?.token)
-            .then(responce => setProfile(responce as IUserProfile))
+            .then(responce => setProfile(responce))
     })
     
     if (profile)

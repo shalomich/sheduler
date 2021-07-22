@@ -15,8 +15,9 @@ const RequestActions : React.FC<RequestActionsType> = ({request, StatusChanged})
     const {id, status, creatorId} = request
     const {authorizedData} = UseAuthorizedContext()
 
+    console.log(request);
     
-
+     
     const currentStatus = (status as string).toLowerCase()
 
     const ChangeStatus = (newStatus : string) => {

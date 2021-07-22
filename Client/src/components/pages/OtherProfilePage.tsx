@@ -4,11 +4,11 @@ import api from "../../api";
 import { selfProfileUri, userUri } from "../../apiConfig";
 import { UseAuthorizedContext } from "../Account";
 import Loading from "../Loading";
-import UserProfile, { IUserProfile } from "../UserProfile";
+import UserProfile from "../UserProfile";
 
 const OtherProfilePage : React.FC<{match : any}> = ({match}) => {
     
-    const[profile, setProfile] = React.useState<IUserProfile>();
+    const[profile, setProfile] = React.useState<any>();
     const {authorizedData} = UseAuthorizedContext()
     
     const userByIdUri = userUri + match.params.id
@@ -16,7 +16,7 @@ const OtherProfilePage : React.FC<{match : any}> = ({match}) => {
 
     React.useEffect(() => {
         api(otherProfileUri,{method: 'GET'})
-            .then(responce => setProfile(responce as IUserProfile))
+            .then(responce => setProfile(responce))
     },[])
 
     const userByIdEditPath = window.location.href + '/edit'

@@ -17,6 +17,7 @@ using static Sheduler.RequestHandlers.GetPostsHandler;
 using static Sheduler.RequestHandlers.GetReplacingHandler;
 using static Sheduler.RequestHandlers.GetRolesHandler;
 using static Sheduler.RequestHandlers.GetUserByIdHandler;
+using static Sheduler.RequestHandlers.GetUserProfileHandler;
 
 namespace Sheduler.Controllers
 {
@@ -34,7 +35,7 @@ namespace Sheduler.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserProfileViewModel>> Get(int id)
+        public async Task<ActionResult<UserFormViewModel>> Get(int id)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(id));
             return Ok(Mapper.Map<UserFormViewModel>(user));
@@ -44,11 +45,10 @@ namespace Sheduler.Controllers
         public async Task<ActionResult<UserProfileViewModel>> GetProfile(int id)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(id));
-            var profileModel = new UserProfileViewModel(
-                Data: Mapper.Map<UserDataModel>(user),
-                Statistics: new UserStatisticsModel(0,0,0,0)
-            );
-            return Ok(profileModel);
+
+            var profile = await Mediator.Send(new GetUserProfileQuery(user));
+
+            return Ok(profile);
         }
 
         [HttpGet("self")]
@@ -84,7 +84,7 @@ namespace Sheduler.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> Update(int id, UserFormViewModel formModel)
         {
-            User user = Mapper.Map<User>(formModel);
+            var user = Mapper.Map<User>(formModel);
 
             await Mediator.Send(new UpdateCommand(id, user));
 
@@ -98,9 +98,14 @@ namespace Sheduler.Controllers
             int authorizedUserId = Convert.ToInt32(User.Claims
                     .First(claim => claim.Type == "id").Value);
 
-            UserFormViewModel formModel = Mapper.Map<UserFormViewModel>(selfRedactionModel);
+            var user = await Mediator.Send(new GetUserByIdQuery(authorizedUserId));
 
-            return await Update(authorizedUserId, formModel);
+            user.Email = selfRedactionModel.Email;
+            user.PhoneNumber = selfRedactionModel.PhoneNumber;
+
+            await Mediator.Send(new UpdateCommand(authorizedUserId, user));
+
+            return NoContent();
         }
 
         [HttpGet("post")]

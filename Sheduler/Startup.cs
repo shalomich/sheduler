@@ -101,7 +101,7 @@ namespace Sheduler
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            //app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             
             app.UseEndpoints(endpoints =>
