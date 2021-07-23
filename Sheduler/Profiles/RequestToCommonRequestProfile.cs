@@ -24,8 +24,8 @@ namespace Sheduler.Profiles
                     mapper => mapper.MapFrom(model => model.ChoosendDates
                         .Select(date => date.ToDateString())
                         .Aggregate((date1, date2) => $"{date1}, {date2}")))
-                .ForMember(view => view.SendingDate,
-                    mapper => mapper.MapFrom(model => model.SendingDate.Value.ToDateString()));
+                .ForMember(view => view.CreationDate,
+                    mapper => mapper.MapFrom(model => model.CreationDate.ToDateString()));
         }
     }
 }

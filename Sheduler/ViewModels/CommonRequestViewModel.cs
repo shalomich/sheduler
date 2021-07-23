@@ -18,8 +18,8 @@ namespace Sheduler.ViewModels
         [JsonProperty("Тип заявки")]
         public string Type { set; get; }
 
-        [JsonProperty("Дата отправки")]
-        public string SendingDate { set; get; }
+        [JsonProperty("Дата создания")]
+        public string CreationDate { set; get; }
 
         [JsonProperty("Выбранные даты")]
         public string ChoosendDates { set; get; }

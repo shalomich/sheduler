@@ -15,7 +15,7 @@ const RequestTable : React.FC<{models : Array<IRequestTable>}> = ({models}) => {
 
     const modelType : string = 'request'
 
-    const headers : Array<string> = ['Заявитель', 'Тип заявки','Дата отправления на согласование','Даты по заявке',
+    const headers : Array<string> = ['Заявитель', 'Тип заявки','Дата создания','Даты по заявке',
     'Количество дней','Согласующий','Статус']
     
     return(

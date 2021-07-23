@@ -54,6 +54,7 @@ namespace Sheduler.Controllers
 
         
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<FullRequestFormViewModel>> GetById(int id)
         {
             Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
@@ -64,6 +65,7 @@ namespace Sheduler.Controllers
         }
 
         [HttpGet("{id}/profile")]
+        [Authorize]
         public async Task<ActionResult<FullRequestViewModel>> GetRequestProfileById(int id)
         {
             Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
@@ -74,6 +76,7 @@ namespace Sheduler.Controllers
         }
 
         [HttpGet("{id}/type")]
+        [Authorize]
         public async Task<ActionResult<string>> GetRequestType(int id)
         {
             Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
@@ -110,7 +113,6 @@ namespace Sheduler.Controllers
 
             return NoContent();
         }
-
 
         private async Task<IActionResult> ChangeRequestStatus(int id, RequestStatus status)
         {

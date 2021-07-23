@@ -20,10 +20,7 @@ namespace Sheduler.ViewModels
         public ISet<DateTime> ChoosendDates { set; get; }
 
         [JsonProperty("Дата создания")]
-        public DateTime CreationDate { set; get; }
-
-        [JsonProperty("Дата отправки")]
-        public DateTime? SendingDate { set; get; }
+        public string CreationDate { set; get; }
 
         [JsonProperty("Согласующий")]
         public string ApprovingName { set; get; }
@@ -39,10 +36,7 @@ namespace Sheduler.ViewModels
         public string WorkingPlan { set; get; }
 
         [JsonProperty("Тип отпуска")]
-        public VacationType VacationType { set; get; }
-
-        [JsonProperty("Возможность перенести даты")]
-        public bool? IsDateChangeable { set; get; }
+        public string VacationType { set; get; }
 
         [JsonProperty("Даты отработки")]
         public ISet<DateTime> WorkOffDates { set; get; }

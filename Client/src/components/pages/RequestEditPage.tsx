@@ -1,7 +1,9 @@
 import axios from "axios";
 import { async } from "q";
 import React from "react";
+import api from "../../api";
 import { formUri, requestUri } from "../../apiConfig";
+import { UseAuthorizedContext } from "../Account";
 import EditForm from "../forms/EditForm";
 import Loading from "../Loading";
 import FormPage from "./FormPage";
@@ -12,10 +14,12 @@ const RequestEditPage : React.FC<{match : any}> = ({match}) => {
 
     const requestByIdUri = requestUri + match.params.id
 
+    const {authorizedData} = UseAuthorizedContext()
+
     React.useEffect(() => {
         const requestTypeUri = requestByIdUri  + '/type'
-        axios.get(requestTypeUri)
-            .then(response => setRequestType(response.data))
+        api(requestTypeUri, {method:'GET'}, authorizedData?.token)
+            .then(response => setRequestType(response as string))
     },[])
 
     const requestFormUri = formUri + requestType

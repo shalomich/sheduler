@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { Fragment } from "react";
+import api from "../../api";
 import { requestUri } from "../../apiConfig";
 import ShowInfo from "../../HOCs/ShowInfo";
+import { UseAuthorizedContext } from "../Account";
 import { BaseInfoItem } from "../InfoItem";
 import Loading from "../Loading";
 import RequestActions from "../RequestActions";
@@ -12,10 +14,12 @@ const RequestPage : React.FC<{match : any}> = ({match}) => {
     const[request, setRequest] = React.useState<any>()
 
     const uri = requestUri + match.params.id + '/profile'
+
+    const {authorizedData} = UseAuthorizedContext()
     
     React.useEffect(()=>{
-        axios.get(uri)
-            .then(responce => setRequest(responce.data))
+        api(uri, {method:'GET'}, authorizedData?.token)
+            .then(responce => setRequest(responce))
     },[])
 
     const RequestInfoBlock = ShowInfo(BaseInfoItem)
