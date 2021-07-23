@@ -30,7 +30,7 @@ namespace Sheduler.RequestHandlers.Crud
             }
             catch(Exception exception)
             {
-                throw new RestException("Creation error" ,HttpStatusCode.BadRequest,exception);
+                throw new RestException("Невалидные данные" ,HttpStatusCode.BadRequest);
             }
 
             return request.Entity.Id;

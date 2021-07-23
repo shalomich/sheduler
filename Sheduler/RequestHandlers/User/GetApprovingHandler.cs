@@ -24,7 +24,7 @@ namespace Sheduler.RequestHandlers
         public async Task<IEnumerable<OptionModel>> Handle(GetApprovingQuery request, CancellationToken cancellationToken)
         {
             return await Context.GetAllUsers()
-                .Where(user => user.Role == UserRole.Director || user.Role == UserRole.Manager)
+                .Where(user => user.Role == UserRole.Director)
                 .Where(user => user.Name != null && user.Id != request.UserId)
                 .Select(user => new OptionModel(user.Name, user.Id.ToString()))
                 .ToListAsync();

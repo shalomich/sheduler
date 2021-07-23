@@ -21,7 +21,7 @@ const RequestPage : React.FC<{match : any}> = ({match}) => {
     const RequestInfoBlock = ShowInfo(BaseInfoItem)
 
     if (request) {
-        const {id, ...data} = request
+        const {id, status, creatorId, ...data} = request
 
         Object.keys(data).forEach(key => {data[key] === null && delete data[key]} )
         return(
@@ -29,7 +29,7 @@ const RequestPage : React.FC<{match : any}> = ({match}) => {
                 <h1>Данные о заявке</h1>
                 <div>
                     <RequestInfoBlock model={data}/>
-                    <RequestActions request={request} StatusChanged={newStatus => {
+                    <RequestActions requestActionData={{id,status,creatorId}} StatusChanged={newStatus => {
                         const changedRequest = {...request} 
                         changedRequest.status = newStatus
                         setRequest(changedRequest) 

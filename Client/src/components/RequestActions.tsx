@@ -1,23 +1,25 @@
 import axios from "axios";
 import React from "react";
-import { requestUri } from "../apiConfig";
+import internal from "stream";
+import { allowedStatus, approvedStatus, cancelledStatus, createdStatus, disallowedStatus, disapprovedStatus, requestUri, sentStatus, withdrawnStatus } from "../apiConfig";
 import { DirectorRole, ManagerRole } from "../appConfig";
 import { GetAccessOrDestroyFC } from "../HOCs/GetAccess";
 import { UseAuthorizedContext } from "./Account";
 
 type RequestActionsType = {
-    request: any,
+    requestActionData: {
+        id : number,
+        status : string,
+        creatorId : number
+    },
     StatusChanged : (newStatus : string) => void
 }
 
-const RequestActions : React.FC<RequestActionsType> = ({request, StatusChanged}) => {
+const RequestActions : React.FC<RequestActionsType> = ({requestActionData, StatusChanged}) => {
 
-    const {id, status, creatorId} = request
+    const {id, status, creatorId} = requestActionData
     const {authorizedData} = UseAuthorizedContext()
-
-    console.log(request);
-    
-     
+ 
     const currentStatus = (status as string).toLowerCase()
 
     const ChangeStatus = (newStatus : string) => {
@@ -27,12 +29,12 @@ const RequestActions : React.FC<RequestActionsType> = ({request, StatusChanged})
         axios.put(statusUri)
             .then(responce => StatusChanged(newStatus))
     }
-    
-    const RequestManagerOrDirectorActions = GetAccessOrDestroyFC([ManagerRole,DirectorRole], RequestOtherActions)
 
     if (creatorId == authorizedData?.id)
         return <RequestSelfActions currentStatus={currentStatus} changeStatus={ChangeStatus}/>
-    else return <RequestManagerOrDirectorActions currentStatus={currentStatus} changeStatus={ChangeStatus}/>  
+    if (authorizedData?.role === DirectorRole)
+        return <RequestOtherActions currentStatus={currentStatus} changeStatus={ChangeStatus}/> 
+    else return null 
 }
 
 export default RequestActions
@@ -54,15 +56,15 @@ const RequestSelfActions : React.FC<RequestUserActionsType> = ({currentStatus, c
     
     const BuildButton = CreateChangeStatusButton(changeStatus)
     
-    const SentButton = BuildButton('sent', 'отправить на согласование')
-    const WithdrawnButton = BuildButton('withdrawn', 'отозвать с согласования')
-    const CancelledButton = BuildButton('cancelled', 'Отменить')
+    const SentButton = BuildButton(sentStatus, 'отправить на согласование')
+    const WithdrawnButton = BuildButton(withdrawnStatus, 'отозвать с согласования')
+    const CancelledButton = BuildButton(cancelledStatus, 'Отменить')
 
     const editPath = window.location.pathname + '/edit'
 
     switch(currentStatus) {
-        case 'created' :
-        case 'withdrawn' : 
+        case createdStatus :
+        case withdrawnStatus : 
             return (
                 <div>
                     {SentButton}
@@ -73,23 +75,23 @@ const RequestSelfActions : React.FC<RequestUserActionsType> = ({currentStatus, c
                 </div>
             )
         
-        case 'sent':
-        case 'disapproved':
-        case 'disallowed':
+        case sentStatus:
+        case disapprovedStatus:
+        case disallowedStatus:
             return (
                 <div>
                     {WithdrawnButton}
                     {CancelledButton}
                 </div>
             )
-        case 'approved':
-        case 'allowed':
+        case approvedStatus:
+        case allowedStatus:
             return (
                 <div>
                     {CancelledButton}
                 </div>
             )
-        case 'cancelled':
+        case cancelledStatus:
             return null
         default: throw 'Uncorrect status'
     }
@@ -99,26 +101,21 @@ const RequestOtherActions : React.FC<RequestUserActionsType> = ({currentStatus, 
     
     const BuildButton = CreateChangeStatusButton(changeStatus)
     
-    const ApprovedButton = BuildButton('approved', 'согласовать')
-    const DisapprovedButton = BuildButton('disapproved', 'не согласовать')
+    const ApprovedButton = BuildButton(approvedStatus, 'согласовать')
+    const DisapprovedButton = BuildButton(disapprovedStatus, 'не согласовать')
     
-    const AllowedButton = BuildButton('allowed', 'утвердить')
-    const DisallowedButton = BuildButton('disallowed', 'не утвердить')
+    const AllowedButton = BuildButton(allowedStatus, 'утвердить')
+    const DisallowedButton = BuildButton(disallowedStatus, 'не утвердить')
      
-    const editPath = window.location.pathname + '/edit'
-
     switch(currentStatus) {
-        case 'sent':
+        case sentStatus:
             return (
                 <div>
                     {ApprovedButton}
                     {DisapprovedButton}
-                    <a href={editPath}>
-                        <button>Редактировать</button>
-                    </a>
                 </div>
             )
-        case 'approved':
+        case approvedStatus:
             return (
                 <div>
                     {AllowedButton}

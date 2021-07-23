@@ -19,7 +19,21 @@ export const requestUri : string = baseApiUri + 'request/'
 
 export const requestTypesUri : string = requestUri + 'types'
 
-export const selfProfileUri : string = userUri + 'self'
+export const selfUri : string = userUri + 'self/'
+
+export const selfProfileUri : string = selfUri + 'profile'
+
+export const createdStatus = 'created'
+export const sentStatus = 'sent'
+export const withdrawnStatus = 'withdrawn'
+export const cancelledStatus = 'cancelled'
+export const approvedStatus = 'approved'
+export const disapprovedStatus = 'disapproved'
+export const allowedStatus = 'allowed'
+export const disallowedStatus = 'disallowed'
+
+
+
 
 export const requestTypeOptions : Array<Option> = [
     {

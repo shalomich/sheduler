@@ -12,8 +12,5 @@ namespace Sheduler.ViewModels.RequestForm
     {
         [FormField(FormFieldType.Select, "Тип отпуска", true, "request/vacationType")]
         public VacationType VacationType { set; get; }
-
-        [FormField(FormFieldType.Radio, "Возможность редактирования дат согласующим")]
-        public bool IsDateChangeable { set; get; } = false;
     }
 }

@@ -8,8 +8,11 @@ type CalendarType = {
 
 const Calendar : React.FC<CalendarType> = ({name, value, onValueChange}) => {
 
-    value = value.map(date => new Date(date))
-    const [dates, setDates] = React.useState(value === undefined ? [] : value)
+    if (value)
+        value = value.map(date => new Date(date))
+    else value = []
+
+    const [dates, setDates] = React.useState(value)
 
     const ChangeDate = (newDate : Date) => {
         let newDates : Array<Date>

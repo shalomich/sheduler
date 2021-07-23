@@ -43,7 +43,7 @@ namespace Sheduler.RequestHandlers.Crud
             }
             catch (Exception exception)
             {
-                throw new RestException("Updating error", HttpStatusCode.BadRequest, exception);
+                throw new RestException("Невалидные данные", HttpStatusCode.BadRequest, exception);
             }
 
             return Unit.Value;

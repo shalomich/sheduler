@@ -35,13 +35,25 @@ namespace Sheduler.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, Manager, Director")]
         public async Task<ActionResult<UserFormViewModel>> Get(int id)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(id));
             return Ok(Mapper.Map<UserFormViewModel>(user));
         }
 
+        private int AuthorizedUserId => Convert.ToInt32(User.Claims
+            .First(claim => claim.Type == "id").Value);
+
+        [HttpGet("self")]
+        [Authorize]
+        public async Task<ActionResult<UserFormViewModel>> Get()
+        {
+            return await Get(AuthorizedUserId);
+        }
+
         [HttpGet("{id}/profile")]
+        [Authorize(Roles = "Admin, Manager, Director")]
         public async Task<ActionResult<UserProfileViewModel>> GetProfile(int id)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(id));
@@ -51,14 +63,11 @@ namespace Sheduler.Controllers
             return Ok(profile);
         }
 
-        [HttpGet("self")]
+        [HttpGet("self/profile")]
         [Authorize]
         public async Task<ActionResult<UserProfileViewModel>> GetProfile()
         {
-            int authorizedUserId = Convert.ToInt32(User.Claims
-                    .First(claim => claim.Type == "id").Value);
-
-            return await GetProfile(authorizedUserId);
+            return await GetProfile(AuthorizedUserId);
         }
 
 
@@ -72,6 +81,7 @@ namespace Sheduler.Controllers
         }  
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> CreateUser(UserFormViewModel formModel)
         {
             User user = Mapper.Map<User>(formModel);
@@ -82,6 +92,7 @@ namespace Sheduler.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> Update(int id, UserFormViewModel formModel)
         {
             var user = Mapper.Map<User>(formModel);
@@ -95,15 +106,12 @@ namespace Sheduler.Controllers
         [Authorize]
         public async Task<ActionResult<User>> Update(SelfRedactionFormViewModel selfRedactionModel)
         {
-            int authorizedUserId = Convert.ToInt32(User.Claims
-                    .First(claim => claim.Type == "id").Value);
-
-            var user = await Mediator.Send(new GetUserByIdQuery(authorizedUserId));
+            var user = await Mediator.Send(new GetUserByIdQuery(AuthorizedUserId));
 
             user.Email = selfRedactionModel.Email;
             user.PhoneNumber = selfRedactionModel.PhoneNumber;
 
-            await Mediator.Send(new UpdateCommand(authorizedUserId, user));
+            await Mediator.Send(new UpdateCommand(AuthorizedUserId, user));
 
             return NoContent();
         }
@@ -124,6 +132,7 @@ namespace Sheduler.Controllers
         }
 
         [HttpGet("{id}/dates")]
+        [Authorize]
         public async Task<ActionResult<ISet<DateTime>>> GetBusyDates(int id)
         {
             var busyDates = await Mediator.Send(new GetBusyDatesQuery(id));
@@ -131,15 +140,11 @@ namespace Sheduler.Controllers
             return Ok(busyDates);
         }
 
-        private int UserId => Convert.ToInt32(User.Claims
-            .Single(claim => claim.Type == "id").Value);
-
-
         [HttpGet("approving")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<OptionModel>>> GetApprovings()
         {
-            var approvings = await Mediator.Send(new GetApprovingQuery(UserId));
+            var approvings = await Mediator.Send(new GetApprovingQuery(AuthorizedUserId));
 
             return Ok(approvings);
         }
@@ -148,7 +153,7 @@ namespace Sheduler.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<OptionModel>>> GetReplacings()
         {
-            var replacings = await Mediator.Send(new GetReplacingQuery(UserId));
+            var replacings = await Mediator.Send(new GetReplacingQuery(AuthorizedUserId));
 
             return Ok(replacings);
         }

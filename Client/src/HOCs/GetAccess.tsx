@@ -5,7 +5,9 @@ import { UseAuthorizedContext } from "../components/Account";
 
 export const GetAccessOrDestroyFC = (rolesWithAccess : Array<string>, Component : React.FC<any>) => {
     const TryDestroy : React.FC<any> = (...props) => 
-        IsInRole(rolesWithAccess) == false ? null :  <Component {...props}/>
+        IsInRole(rolesWithAccess) === false ? null :  <Component {...props}/>
+    console.log(IsInRole(rolesWithAccess));
+    
     return TryDestroy
 }
 
@@ -26,7 +28,6 @@ export const GetAccessOrBack = (rolesWithAccess : Array<string>, Component : Rea
     return TryBack
 }
 const IsInRole = (rolesWithAccess : Array<string>) => {
-    
     const intersection : Array<string> = Roles
         .filter(role => rolesWithAccess
             .includes(role));
@@ -36,5 +37,5 @@ const IsInRole = (rolesWithAccess : Array<string>) => {
     
     const {authorizedData} = UseAuthorizedContext()
 
-    return authorizedData && rolesWithAccess.includes(authorizedData?.role) 
+    return authorizedData && rolesWithAccess.includes(authorizedData.role) 
 }

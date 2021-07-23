@@ -30,6 +30,9 @@ const FormPage : React.FC<FormPageType> = ({formUri,actionUri, FormComponent, ma
         axios.get(formUri)
             .then(async responce => {
                 const template : Array<FormFieldTemplate> = responce.data.template
+
+                console.log(formUri);
+                
     
                 for (var fieldTemplate of template){
                     const metadataPath : string = fieldTemplate.metadata
