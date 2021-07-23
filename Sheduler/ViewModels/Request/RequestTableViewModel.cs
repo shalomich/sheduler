@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    public class CommonRequestViewModel
+    public class RequestTableViewModel
     {
         public int Id { set; get; }
         

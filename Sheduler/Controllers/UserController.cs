@@ -73,11 +73,11 @@ namespace Sheduler.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Manager, Director")]
-        public async Task<ActionResult<IEnumerable<UserSummaryViewModel>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserTableViewModel>>> GetAll()
         {
             var users = await Mediator.Send(new GetUsersQuery(User.IsInRole(UserRole.Manager.ToString())));
 
-            return Ok(users.Select(user => Mapper.Map<UserSummaryViewModel>(user)));
+            return Ok(users.Select(user => Mapper.Map<UserTableViewModel>(user)));
         }  
 
         [HttpPost]
@@ -104,7 +104,7 @@ namespace Sheduler.Controllers
 
         [HttpPut("self")]
         [Authorize]
-        public async Task<ActionResult<User>> Update(SelfRedactionFormViewModel selfRedactionModel)
+        public async Task<ActionResult<User>> Update(UserSelfFormViewModel selfRedactionModel)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(AuthorizedUserId));
 

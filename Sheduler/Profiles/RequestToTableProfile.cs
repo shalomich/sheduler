@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Profiles
 {
-    public class RequestToCommonRequestProfile : Profile
+    public class RequestToTableProfile : Profile
     {
-        public RequestToCommonRequestProfile()
+        public RequestToTableProfile()
         {
-            CreateMap<Request, CommonRequestViewModel>()
+            CreateMap<Request, RequestTableViewModel>()
                 .ForMember(view => view.CreatorName,
                     mapper => mapper.MapFrom(model => model.Creator.Name))
                 .ForMember(view => view.ApprovingName,

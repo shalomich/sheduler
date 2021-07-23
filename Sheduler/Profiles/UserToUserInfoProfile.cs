@@ -12,7 +12,7 @@ namespace Sheduler.Profiles
     {
         public UserToUserInfoProfile()
         {
-            CreateMap<User, UserSummaryViewModel>()
+            CreateMap<User, UserTableViewModel>()
                .ForMember(view => view.Post,
                    mapper => mapper.MapFrom(model => model.Post.Name))
                .ForMember(view => view.Role,

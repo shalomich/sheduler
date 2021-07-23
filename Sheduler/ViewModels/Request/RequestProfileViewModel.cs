@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    public class FullRequestViewModel
+    public class RequestProfileViewModel
     {
         public int Id { set; get; }
 

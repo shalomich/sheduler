@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels.RequestForm
 {
-    public class FullRequestFormViewModel
+    public class RequestFullFormViewModel
     {
         public int Id { set; get; }
         public ISet<DateTime> ChoosendDates { set; get; }

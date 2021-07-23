@@ -75,8 +75,6 @@ namespace Sheduler
 
             services.AddScoped<ToFormConverter>();
 
-            services.AddTransient<UserProfileFactory>();
-
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

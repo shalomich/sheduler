@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Profiles
 {
-    public class SelfRedactionFormToUserFormProfile : Profile
+    public class SelfFormToFullUserFormProfile : Profile
     {
-        public SelfRedactionFormToUserFormProfile()
+        public SelfFormToFullUserFormProfile()
         {
-            CreateMap<SelfRedactionFormViewModel, UserFormViewModel>();
+            CreateMap<UserSelfFormViewModel, UserFormViewModel>();
         }
     }
 }

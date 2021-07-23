@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Sheduler.Profiles
 {
-    public class RequestToFullRequestProfile : Profile
+    public class RequestToProfileProfile : Profile
     {
-        public RequestToFullRequestProfile()
+        public RequestToProfileProfile()
         {
-            CreateMap<Request, FullRequestViewModel>()
+            CreateMap<Request, RequestProfileViewModel>()
                 .ForMember(view => view.ChoosendDates,
                     mapper => mapper.MapFrom(model => model.ChoosendDates
                     .Select(date => date.ToDateString())
@@ -26,23 +26,23 @@ namespace Sheduler.Profiles
                    mapper => mapper.MapFrom(model => model.Status.ToString().ToLower()));
             
 
-            CreateMap<RestRequest, FullRequestViewModel>()
+            CreateMap<RestRequest, RequestProfileViewModel>()
                  .ForMember(view => view.ReplacingName,
                      mapper => mapper.MapFrom(model => model.Replacing.Name));
 
-            CreateMap<VacationRequest, FullRequestViewModel>()
+            CreateMap<VacationRequest, RequestProfileViewModel>()
                 .ForMember(view => view.VacationType,
                     mapper => mapper.MapFrom(model => model.VacationType.ToString()))
-                .IncludeBase<RestRequest, FullRequestViewModel>();
+                .IncludeBase<RestRequest, RequestProfileViewModel>();
             
-            CreateMap<WeekendVacationRequest, FullRequestViewModel>()
-                .IncludeBase<RestRequest, FullRequestViewModel>();
-            CreateMap<WeekendWorkOffRequest, FullRequestViewModel>()
-                .IncludeBase<RestRequest, FullRequestViewModel>();
-            CreateMap<DayOffRequest, FullRequestViewModel>()
-                .IncludeBase<RestRequest, FullRequestViewModel>();
-            CreateMap<RemoteWorkRequest, FullRequestViewModel>()
-                .IncludeBase<Request, FullRequestViewModel>();
+            CreateMap<WeekendVacationRequest, RequestProfileViewModel>()
+                .IncludeBase<RestRequest, RequestProfileViewModel>();
+            CreateMap<WeekendWorkOffRequest, RequestProfileViewModel>()
+                .IncludeBase<RestRequest, RequestProfileViewModel>();
+            CreateMap<DayOffRequest, RequestProfileViewModel>()
+                .IncludeBase<RestRequest, RequestProfileViewModel>();
+            CreateMap<RemoteWorkRequest, RequestProfileViewModel>()
+                .IncludeBase<Request, RequestProfileViewModel>();
 
         }
     }

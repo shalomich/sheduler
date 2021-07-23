@@ -43,11 +43,11 @@ namespace Sheduler.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<CommonRequestViewModel>>> GetAll()
+        public async Task<ActionResult<IEnumerable<RequestTableViewModel>>> GetAll()
         {
             var requests = await Mediator.Send(new GetAllRequestQuery(UserId, User.IsInRole(UserRole.Employee.ToString())));
 
-            var requestViews = requests.Select(request => Mapper.Map<CommonRequestViewModel>(request));
+            var requestViews = requests.Select(request => Mapper.Map<RequestTableViewModel>(request));
 
             return Ok(requestViews);
         }
@@ -55,22 +55,22 @@ namespace Sheduler.Controllers
         
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<FullRequestFormViewModel>> GetById(int id)
+        public async Task<ActionResult<RequestFullFormViewModel>> GetById(int id)
         {
             Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
 
-            var fullRequest = Mapper.Map<FullRequestFormViewModel>(requestById);
+            var fullRequest = Mapper.Map<RequestFullFormViewModel>(requestById);
             
             return Ok(fullRequest);
         }
 
         [HttpGet("{id}/profile")]
         [Authorize]
-        public async Task<ActionResult<FullRequestViewModel>> GetRequestProfileById(int id)
+        public async Task<ActionResult<RequestProfileViewModel>> GetRequestProfileById(int id)
         {
             Request requestById = await Mediator.Send(new GetRequestByIdQuery(id));
 
-            var requestProfile = Mapper.Map(requestById, requestById.GetType(), typeof(FullRequestViewModel));
+            var requestProfile = Mapper.Map(requestById, requestById.GetType(), typeof(RequestProfileViewModel));
 
             return Ok(requestProfile);
         }
@@ -86,7 +86,7 @@ namespace Sheduler.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Request>> Create([FromQuery] string type, [FromBody]FullRequestFormViewModel fullRequestModel)
+        public async Task<ActionResult<Request>> Create([FromQuery] string type, [FromBody]RequestFullFormViewModel fullRequestModel)
         {
             Request request = Mapper.MapRequestFromForm(type, fullRequestModel);
 
@@ -101,7 +101,7 @@ namespace Sheduler.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<Request>> Update([FromQuery] string type, [FromRoute] int id, [FromBody] FullRequestFormViewModel fullRequestModel)
+        public async Task<ActionResult<Request>> Update([FromQuery] string type, [FromRoute] int id, [FromBody] RequestFullFormViewModel fullRequestModel)
         {
             Request request = Mapper.MapRequestFromForm(type, fullRequestModel);
 

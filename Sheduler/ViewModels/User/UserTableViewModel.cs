@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.ViewModels
 {
-    public record UserSummaryViewModel(int Id) 
+    public record UserTableViewModel(int Id) 
     {
         [JsonProperty("ФИО")] 
         public string Name { get; init; }

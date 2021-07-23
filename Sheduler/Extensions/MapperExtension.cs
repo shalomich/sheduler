@@ -11,7 +11,7 @@ namespace Sheduler.Extensions
 {
     public static class MapperExtension
     {
-        public static Request MapRequestFromForm(this IMapper mapper, string requestTypeName, FullRequestFormViewModel formRequestModel)
+        public static Request MapRequestFromForm(this IMapper mapper, string requestTypeName, RequestFullFormViewModel formRequestModel)
         {
             Type requestType = formRequestModel.GetType().Assembly
                 .GetTypes()

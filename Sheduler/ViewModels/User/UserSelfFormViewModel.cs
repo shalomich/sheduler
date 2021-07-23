@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Sheduler.ViewModels
 {
     [FormModel("self")]
-    public record SelfRedactionFormViewModel
+    public record UserSelfFormViewModel
     {
         [Required]
         [EmailAddress]
