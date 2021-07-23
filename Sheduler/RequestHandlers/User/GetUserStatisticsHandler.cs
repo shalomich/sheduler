@@ -46,7 +46,9 @@ namespace Sheduler.RequestHandlers
             var allRequests = await Context.GetAllRequestsAsync();
 
             int busyDateCount = allRequests
-                .Where(request => request.Status == RequestStatus.Allowed)
+                .Where(request => request.Status == RequestStatus.Allowed
+                    && request.CreatorId == user.Id
+                    && request.ChoosendDates.All(date => date < now))
                 .Sum(request => request.ChoosendDates.Count());
 
             int workedDaysPerYear = CalculateWorkDays(countdownDate, now) - busyDateCount;

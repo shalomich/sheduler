@@ -15,7 +15,7 @@ const OtherProfilePage : React.FC<{match : any}> = ({match}) => {
     const otherProfileUri = userByIdUri + "/profile"
 
     React.useEffect(() => {
-        api(otherProfileUri,{method: 'GET'})
+        api(otherProfileUri,{method: 'GET'}, authorizedData?.token)
             .then(responce => setProfile(responce))
     },[])
 
