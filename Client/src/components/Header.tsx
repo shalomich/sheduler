@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { RolesWithoutEmployee } from "../appConfig";
 import { GetAccessOrDestroyElement } from "../HOCs/GetAccess";
 import { UseAuthorizedContext } from "./Account";
@@ -7,18 +7,19 @@ const Header : React.FC = () => {
 
     const {SignOut, IsAuthorized} = UseAuthorizedContext()
     const UserTablePageLink = GetAccessOrDestroyElement(RolesWithoutEmployee, 
-        <a href='/user'><button>Пользователи</button></a>)
+        <Fragment><a href='/user'>Пользователи</a> | </Fragment>)
     
     if (IsAuthorized())
         return (
+
             <header>
-                <div>
-                    <h1>Планировщик</h1>
-                    <a href='/profile'><button>Профиль</button></a>
-                    <a href='/request'><button>Заявки</button></a>
+                <h1>Планировщик</h1>
+                <nav>
+                    <a href='/profile'>Профиль</a> | 
+                    <a href='/request'>Заявки</a> | 
                     <UserTablePageLink/>
-                    <button onClick={SignOut}>Выйти из аккаунта</button>
-                </div>
+                    <a onClick={SignOut} href='/login'>Выйти из аккаунта</a> 
+                </nav>
             </header>
         )
     

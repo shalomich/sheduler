@@ -10,7 +10,7 @@ const UserProfile : React.FC<{profile: any}> = ({profile}) => {
 
     return(
         <Fragment>
-            <h1>Данные о сотруднике</h1>
+            <h2>Данные о сотруднике</h2>
             <div>
                 <ProfileBlock model={data}/>
             </div>

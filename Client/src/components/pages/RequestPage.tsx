@@ -26,7 +26,7 @@ const RequestPage : React.FC<{match : any}> = ({match}) => {
         Object.keys(data).forEach(key => {data[key] === null && delete data[key]} )
         return(
             <Fragment>
-                <h1>Данные о заявке</h1>
+                <h2>Данные о заявке</h2>
                 <div>
                     <RequestInfoBlock model={data}/>
                     <RequestActions requestActionData={{id,status,creatorId}} StatusChanged={newStatus => {
