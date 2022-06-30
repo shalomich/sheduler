@@ -12,6 +12,7 @@ namespace Sheduler.RestApi.DbConfigs
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
+            builder.ToTable("Posts");
             builder.Property(post => post.Name).IsRequired();
             builder.HasIndex(post => post.Name).IsUnique();
         }
