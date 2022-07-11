@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheduler.RestApi", "Sheduler.RestApi\Sheduler.RestApi.csproj", "{44651966-8B2A-47BD-8F34-3D8F8AA3F0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheduler.Desktop", "Sheduler.Desktop\Sheduler.Desktop.csproj", "{44685866-568E-48FE-BD02-F894F92A3BD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheduler.Desktop", "Sheduler.Desktop\Sheduler.Desktop.csproj", "{44685866-568E-48FE-BD02-F894F92A3BD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheduler.MVVM", "Sheduler.MVVM\Sheduler.MVVM.csproj", "{663C7758-B7B0-4919-8BF6-039453FA3BA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{44685866-568E-48FE-BD02-F894F92A3BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44685866-568E-48FE-BD02-F894F92A3BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44685866-568E-48FE-BD02-F894F92A3BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663C7758-B7B0-4919-8BF6-039453FA3BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663C7758-B7B0-4919-8BF6-039453FA3BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663C7758-B7B0-4919-8BF6-039453FA3BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663C7758-B7B0-4919-8BF6-039453FA3BA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
