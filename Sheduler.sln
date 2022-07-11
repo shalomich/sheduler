@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheduler.Abstractions", "Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheduler.Implementations", "Sheduler.Implementations\Sheduler.Implementations.csproj", "{89AB10B1-3CCF-48C1-AF14-B73467DB9BCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheduler.Shared", "Sheduler.Shared\Sheduler.Shared.csproj", "{B03E60F9-68E9-473A-9773-0ECC53445F42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{89AB10B1-3CCF-48C1-AF14-B73467DB9BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89AB10B1-3CCF-48C1-AF14-B73467DB9BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89AB10B1-3CCF-48C1-AF14-B73467DB9BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B03E60F9-68E9-473A-9773-0ECC53445F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03E60F9-68E9-473A-9773-0ECC53445F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03E60F9-68E9-473A-9773-0ECC53445F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03E60F9-68E9-473A-9773-0ECC53445F42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{6BE5E69F-AAE1-4F69-8861-53601531353F} = {60158331-E0FA-451A-B7E1-DE8410ED6DB5}
 		{3C7D3396-9728-4941-A494-691FD8786C42} = {60158331-E0FA-451A-B7E1-DE8410ED6DB5}
 		{89AB10B1-3CCF-48C1-AF14-B73467DB9BCC} = {60158331-E0FA-451A-B7E1-DE8410ED6DB5}
+		{B03E60F9-68E9-473A-9773-0ECC53445F42} = {60158331-E0FA-451A-B7E1-DE8410ED6DB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A383485-70A5-48ED-8CB8-FDE1D61EB798}
