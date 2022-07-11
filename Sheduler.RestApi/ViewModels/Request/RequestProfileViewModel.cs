@@ -17,7 +17,7 @@ namespace Sheduler.RestApi.ViewModels
         public string Status { set; get; }
 
         [JsonProperty("Выбранные даты")]
-        public ISet<DateTime> ChoosendDates { set; get; }
+        public string ChoosendDates { set; get; }
 
         [JsonProperty("Дата создания")]
         public string CreationDate { set; get; }

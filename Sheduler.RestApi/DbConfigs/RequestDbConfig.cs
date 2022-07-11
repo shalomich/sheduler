@@ -12,6 +12,8 @@ namespace Sheduler.RestApi.DbConfigs
     {
         public virtual void Configure(EntityTypeBuilder<Request> builder)
         {
+            builder.ToTable("Requests");
+
             builder.HasOne(request => request.Creator)
                 .WithMany(user => user.Requests)
                 .HasForeignKey(request => request.CreatorId);

@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Sheduler.RestApi;
 
 namespace Sheduler.RestApi.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210712144700_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220630032006_RenameTables")]
+    partial class RenameTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +37,7 @@ namespace Sheduler.RestApi.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Sheduler.RestApi.Model.Requests.Request", b =>
@@ -66,7 +67,7 @@ namespace Sheduler.RestApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SendingDate")
+                    b.Property<DateTime?>("SendingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("_currentStatus")
@@ -80,7 +81,7 @@ namespace Sheduler.RestApi.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Request");
+                    b.ToTable("Requests");
 
                     b.HasDiscriminator<string>("RequestType").HasValue("Request");
                 });

@@ -20,7 +20,7 @@ using Sheduler.RestApi.Middlewares.ExceptionHandler;
 using Newtonsoft.Json.Converters;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Sheduler
+namespace Sheduler.RestApi
 {
     public class Startup
     {
@@ -84,7 +84,7 @@ namespace Sheduler
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                     });
-                
+
             });
         }
 
@@ -94,7 +94,7 @@ namespace Sheduler
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseRouting();
             app.UseCors("CorsPolicy");
 
@@ -103,7 +103,7 @@ namespace Sheduler
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
