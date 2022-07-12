@@ -5,7 +5,7 @@ using Sheduler.Shared;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sheduler.UseCases.Auth;
+namespace Sheduler.UseCases.Auth.Login;
 
 public record LoginCommand(string Email, string Password) : IRequest;
 internal class LoginCommandHandler : AsyncRequestHandler<LoginCommand>
