@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\tools\Saritasa.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Saritasa.Tools.Domain" Version="0.8.2" />
+    <PackageReference Include="Saritasa.Tools.EFCore5" Version="0.8.2" />
+    <PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.354">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sheduler.DomainServices\Sheduler.DomainServices.csproj" />
+    <ProjectReference Include="..\Sheduler.Domain\Sheduler.Domain.csproj" />
+    <ProjectReference Include="..\Sheduler.Infrastructure.Abstractions\Sheduler.Infrastructure.Abstractions.csproj" />
+    <ProjectReference Include="..\Sheduler.UseCases.Common\Sheduler.UseCases.Common.csproj" />
+  </ItemGroup>
+
+</Project>
