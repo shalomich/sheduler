@@ -52,7 +52,8 @@ namespace Sheduler.Desktop
         {
             var builder = new ConfigurationBuilder()
              .SetBasePath(Directory.GetCurrentDirectory())
-             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+             .AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
 
             Configuration = builder.Build();
 
@@ -87,6 +88,7 @@ namespace Sheduler.Desktop
 
         private void ConfigureServices(IServiceCollection services)
         {
+            UseCases.UseCasesModule.Register(services, Configuration);
             Infrastructure.DependencyInjection.DesktopModule.Register(services, Configuration);
             UseCases.Common.Infrastructure.CommonModule.Register(services);
         }

@@ -25,7 +25,7 @@ namespace Sheduler.Desktop.Infrastructure.DependencyInjection
 
             NavigationModule.Register(services);
             MediatRModule.Register(services);
-            IdentityModule.Register(services);
+            IdentityModule.Register(services, configuration);
             AutoMapperModule.Register(services);
             DatabaseModule.Register(services, configuration);
             DomainModule.Register(services);
