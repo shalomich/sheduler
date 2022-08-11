@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Sheduler.RestApi.Extensions;
 using Sheduler.RestApi.Model;
 using Sheduler.RestApi.ViewModels;
+using Sheduler.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

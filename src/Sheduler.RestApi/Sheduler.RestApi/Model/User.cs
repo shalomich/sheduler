@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using Sheduler.RestApi.Attributes;
 using Sheduler.RestApi.Model.Requests;
+using Sheduler.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Sheduler.RestApi.Model
 {
-   
+
     public class User : IEntity
     {
         public User(string email, string password)

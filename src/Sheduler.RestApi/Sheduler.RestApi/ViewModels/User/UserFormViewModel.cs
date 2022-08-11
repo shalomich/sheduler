@@ -1,5 +1,5 @@
 ﻿using Sheduler.RestApi.Attributes;
-using Sheduler.RestApi.Model;
+using Sheduler.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

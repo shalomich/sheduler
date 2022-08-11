@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sheduler.RestApi.Model;
 using Sheduler.RestApi.ViewModels;
+using Sheduler.Shared.Dtos.Users;
+using Sheduler.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,11 +75,11 @@ namespace Sheduler.RestApi.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Manager, Director")]
-        public async Task<ActionResult<IEnumerable<UserTableViewModel>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserPreviewDto>>> GetAll()
         {
             var users = await Mediator.Send(new GetUsersQuery(User.IsInRole(UserRole.Manager.ToString())));
 
-            return Ok(users.Select(user => Mapper.Map<UserTableViewModel>(user)));
+            return Ok(users.Select(user => Mapper.Map<UserPreviewDto>(user)));
         }  
 
         [HttpPost]
